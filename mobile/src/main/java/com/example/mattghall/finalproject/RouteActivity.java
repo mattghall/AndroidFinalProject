@@ -13,9 +13,9 @@ import android.widget.Toast;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class Routes extends Fragment {
+public class RouteActivity extends Fragment {
 
-    public Routes() {
+    public RouteActivity() {
     }
 
     private String[] climbingAreaNames = { "Route A","Route B", "Route C","Route Error" };

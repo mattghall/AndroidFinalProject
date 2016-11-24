@@ -2,12 +2,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="layout.fragment_climbing_areas">
+    tools:context="layout.fragment_climbing_areas"
+    tools:showIn="@layout/activity_main">>
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:text="@string/climbing_areas_title" />
+    <ListView
+        android:id="@+id/areas_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
 </FrameLayout>
