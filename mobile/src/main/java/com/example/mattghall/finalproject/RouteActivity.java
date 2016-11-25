@@ -18,9 +18,9 @@ public class RouteActivity extends Fragment {
     public RouteActivity() {
     }
 
-    private String[] climbingAreaNames = { "Route A","Route B", "Route C","Route Error" };
-    private String[] climbingAreaIds = { "0","1","2" };
-    private ListView routesListView;
+    private String[] routeNames = { "Route A","Route B", "Route C","Route Error" };
+    private String[] routeIds = { "0","1","2" };
+    private ListView routeListView;
     private ArrayAdapter arrayAdapter;
 
     @Override
@@ -28,16 +28,16 @@ public class RouteActivity extends Fragment {
                              Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.fragment_routes,container,false);
 
-        routesListView = (ListView) fragmentView.findViewById(R.id.routes_listview);
+        routeListView = (ListView) fragmentView.findViewById(R.id.routes_listview);
 
-        arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, climbingAreaNames);
-        routesListView.setAdapter(arrayAdapter);
+        arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, routeNames);
+        routeListView.setAdapter(arrayAdapter);
 
-        routesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        routeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               if(climbingAreaIds.length > position && climbingAreaNames.length > position) {
-                   String msg = climbingAreaIds[position] + ": " + climbingAreaNames[position];
+               if(routeIds.length > position && routeNames.length > position) {
+                   String msg = routeIds[position] + ": " + routeNames[position];
                    ToastMachine(msg);
                }
                 else

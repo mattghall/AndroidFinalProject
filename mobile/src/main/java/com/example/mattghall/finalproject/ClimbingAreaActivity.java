@@ -20,20 +20,20 @@ public class ClimbingAreaActivity extends Fragment {
 
     private String[] climbingAreaNames = { "Area A","Area B", "Area C","Area Error" };
     private String[] climbingAreaIds = { "0","1","2" };
-    private ListView routesListView;
+    private ListView climbingAreaListView;
     private ArrayAdapter arrayAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(R.layout.fragment_routes,container,false);
+        View fragmentView = inflater.inflate(R.layout.fragment_climbing_areas,container,false);
 
-        routesListView = (ListView) fragmentView.findViewById(R.id.routes_listview);
+        climbingAreaListView = (ListView) fragmentView.findViewById(R.id.areas_listview);
 
         arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, climbingAreaNames);
-        routesListView.setAdapter(arrayAdapter);
+        climbingAreaListView.setAdapter(arrayAdapter);
 
-        routesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        climbingAreaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(climbingAreaIds.length > position && climbingAreaNames.length > position) {
