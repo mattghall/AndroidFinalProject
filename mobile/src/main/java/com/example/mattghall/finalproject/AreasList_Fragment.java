@@ -159,9 +159,9 @@ public class AreasList_Fragment extends Fragment {
     {
         Bundle buns = new Bundle();
         buns.putString("area", area.toString());
-        RouteList_Fragment route_fragment = new RouteList_Fragment();
-        route_fragment.setArguments(buns);
-        getFragmentManager().beginTransaction().add(R.id.fragment, route_fragment).commit();
+        RouteList_Fragment routelist_fragment = new RouteList_Fragment();
+        routelist_fragment.setArguments(buns);
+        getFragmentManager().beginTransaction().add(R.id.fragment, routelist_fragment).commit();
     }
 
     void WriteNewDatersFile() {

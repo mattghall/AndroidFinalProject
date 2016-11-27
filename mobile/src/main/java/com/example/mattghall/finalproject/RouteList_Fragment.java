@@ -1,5 +1,6 @@
 package com.example.mattghall.finalproject;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -54,6 +55,16 @@ public class RouteList_Fragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                if(routeIds.length > position && routeNames.length > position) {
                    String msg = routeIds[position] + ": " + routeNames[position];
+                   String temp = "route-" + String.valueOf(routeIds[position]);
+                   try {
+                       JSONObject route = areaData.getJSONObject("routes").getJSONObject(temp);
+                       OpenArea(route.getString("route-id"),route);
+                   } catch (JSONException e) {
+                       e.printStackTrace();
+                   }
+
+
+                   OpenArea(null,null);
                }
                 else
                {
@@ -103,5 +114,10 @@ public class RouteList_Fragment extends Fragment {
         }
 
         return routeIds;
+    }
+    void OpenArea(String climbingAreaId, JSONObject area)
+    {
+        Intent in = new Intent(getActivity(),DetailsActivity.class);
+        startActivity(in);
     }
 }
