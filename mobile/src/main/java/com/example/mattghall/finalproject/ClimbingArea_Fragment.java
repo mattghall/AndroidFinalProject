@@ -2,8 +2,10 @@ package com.example.mattghall.finalproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +45,7 @@ public class ClimbingArea_Fragment extends Fragment {
 
         climbingAreaListView = (ListView) fragmentView.findViewById(R.id.areas_listview);
 
-        JSONObject data = ReadDaters();
+        final JSONObject data = ReadDaters();
 
         try {
             climbingAreaNames = GetClimbingAreas(data);
@@ -62,27 +64,19 @@ public class ClimbingArea_Fragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (climbingAreaIds.length > position && climbingAreaNames.length > position) {
                     String msg = climbingAreaIds[position] + ": " + climbingAreaNames[position];
-                    ToastMachine(msg);
-                    OpenArea();
+                    String temp = "area-" + climbingAreaIds[position];
+                    try {
+                        OpenArea(climbingAreaIds[position],data.getJSONObject(temp));
+                    } catch (JSONException e) {
+                        ToastMachine("Could not load area");
+                        e.printStackTrace();
+                    }
                 } else {
-                    ToastMachine("Could not load Route");
+                    ToastMachine("Could not load area");
                 }
             }
         });
         return fragmentView;
-    }
-
-    void WriteNewDatersFile() {
-        String string = "";
-        FileOutputStream fos = null;
-        try {
-            fos = ctx.openFileOutput(FILENAME, Context.MODE_PRIVATE);
-            fos.flush();
-            fos.write(string.getBytes());
-            fos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     JSONObject ReadDaters()
@@ -111,6 +105,14 @@ public class ClimbingArea_Fragment extends Fragment {
         }
     }
 
+    JSONObject GetArea(int areaId, JSONObject data) throws JSONException {
+        String temp = "";
+        JSONObject found;
+        temp = "area-" + String.valueOf(areaId);
+        found = data.getJSONObject(temp);
+        return found;
+    }
+
     void ToastMachine(String msg){
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(getContext(), msg, duration);
@@ -131,13 +133,10 @@ public class ClimbingArea_Fragment extends Fragment {
             temp = obj.getString("area-name");
             areaNames[i] = temp;
         }
-
         return areaNames;
     }
 
     String [] GetClimbingAreaIds(JSONObject data) throws JSONException {
-        ToastMachine("GetClimbingAreas");
-
         String temp = "";
         JSONObject obj = null;
         int l = data.length();
@@ -155,8 +154,12 @@ public class ClimbingArea_Fragment extends Fragment {
         return areaIds;
     }
 
-    void OpenArea()
+    void OpenArea(String climbingAreaId, JSONObject area)
     {
-
+        Bundle buns = new Bundle();
+        buns.putString("area", area.toString());
+        Route_Fragment route_fragment = new Route_Fragment();
+        route_fragment.setArguments(buns);
+        getFragmentManager().beginTransaction().add(R.id.fragment, route_fragment).commit();
     }
 }

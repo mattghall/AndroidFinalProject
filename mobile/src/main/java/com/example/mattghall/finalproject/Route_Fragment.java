@@ -10,6 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -22,10 +25,23 @@ public class Route_Fragment extends Fragment {
     private String[] routeIds = { "0","1","2" };
     private ListView routeListView;
     private ArrayAdapter arrayAdapter;
+    JSONObject areaData = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Bundle buns = this.getArguments();
+        try {
+            if(buns == null)
+                throw new Exception();
+            areaData = new JSONObject(buns.getString("area"));
+            routeNames = GetRouteNames(areaData);
+            routeIds = GetRouteIds(areaData);
+        } catch (Exception e) {
+            ToastMachine("Could not get routes");
+            e.printStackTrace();
+        }
+
         View fragmentView = inflater.inflate(R.layout.fragment_routes,container,false);
 
         routeListView = (ListView) fragmentView.findViewById(R.id.routes_listview);
@@ -38,7 +54,6 @@ public class Route_Fragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                if(routeIds.length > position && routeNames.length > position) {
                    String msg = routeIds[position] + ": " + routeNames[position];
-                   ToastMachine(msg);
                }
                 else
                {
@@ -53,5 +68,40 @@ public class Route_Fragment extends Fragment {
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(getContext(), msg, duration);
         toast.show();
+    }
+
+    String [] GetRouteNames(JSONObject data) throws JSONException {
+        String temp = "";
+        JSONObject obj = null;
+        int l = data.getJSONObject("routes").length();
+
+        String[] routeNames = new String[l];
+
+        for(int i = 0; i < l; i++)
+        {
+            temp = "route-" + String.valueOf(i);
+            obj = data.getJSONObject("routes").getJSONObject(temp);
+            temp = obj.getString("route-name");
+            routeNames[i] = temp;
+        }
+        return routeNames;
+    }
+
+    String [] GetRouteIds(JSONObject data) throws JSONException {
+        String temp = "";
+        JSONObject obj = null;
+        int l = data.getJSONObject("routes").length();
+
+        String[] routeIds = new String[l];
+
+        for(int i = 0; i < l; i++)
+        {
+            temp = "route-" + String.valueOf(i);
+            obj = data.getJSONObject("routes").getJSONObject(temp);
+            temp = obj.getString("route-id");
+            routeIds[i] = temp;
+        }
+
+        return routeIds;
     }
 }
