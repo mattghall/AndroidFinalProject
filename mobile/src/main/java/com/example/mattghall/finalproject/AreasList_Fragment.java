@@ -1,11 +1,8 @@
 package com.example.mattghall.finalproject;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +20,9 @@ import java.io.FileOutputStream;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ClimbingArea_Fragment extends Fragment {
+public class AreasList_Fragment extends Fragment {
 
-    public ClimbingArea_Fragment() {
+    public AreasList_Fragment() {
     }
     String newData = "{ \"area-0\": { \"area-id\": \"0\", \"area-name\": \"Boring Place Don't Go Here\", \"trailhead-name\": \"test-trailhead\", \"trailhead-gps\": \"000200020\", \"routes\": { \"route-0\": { \"route-id\": \"0\", \"route-name\": \"testrouteOne\", \"route-area\": \"area-0\", \"route-difficulty\": \"5-9\", \"route-img\": \"DCS 4320\", \"anchors\": { \"anchor-0\": { \"anchor-num\": \"0\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-1\": { \"anchor-num\": \"1\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-2\": { \"anchor-num\": \"2\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" } } }, \"route-1\": { \"route-id\": \"1\", \"route-name\": \"testroutetwo\", \"route-area\": \"area-0\", \"route-difficulty\": \"5-9\", \"route-img\": \"DCS 4320\", \"anchors\": { \"anchor-0\": { \"anchor-num\": \"0\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-1\": { \"anchor-num\": \"1\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-2\": { \"anchor-num\": \"2\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" } } } } }, \"area-1\": { \"area-id\": \"1\", \"area-name\": \"Party Area Fun Time\", \"trailhead-name\": \"test-trailhead\", \"trailhead-gps\": \"000200020\", \"routes\": { \"route-0\": { \"route-id\": \"0\", \"route-name\": \"route1party\", \"route-area\": \"area-0\", \"route-difficulty\": \"5-9\", \"route-img\": \"DCS 4320\", \"anchors\": { \"anchor-0\": { \"anchor-num\": \"0\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-1\": { \"anchor-num\": \"1\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-2\": { \"anchor-num\": \"2\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" } } }, \"route-1\": { \"route-id\": \"1\", \"route-name\": \"Yee ha this one is Guuuuuud\", \"route-area\": \"area-0\", \"route-difficulty\": \"5-9\", \"route-img\": \"DCS 4320\", \"anchors\": { \"anchor-0\": { \"anchor-num\": \"0\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-1\": { \"anchor-num\": \"1\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-2\": { \"anchor-num\": \"2\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" } } } } } }";
 
@@ -44,6 +41,7 @@ public class ClimbingArea_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         ctx = getContext();
         //WriteNewDatersFile();
+
         View fragmentView = inflater.inflate(R.layout.fragment_climbing_areas, container, false);
 
         climbingAreaListView = (ListView) fragmentView.findViewById(R.id.areas_listview);
@@ -161,7 +159,7 @@ public class ClimbingArea_Fragment extends Fragment {
     {
         Bundle buns = new Bundle();
         buns.putString("area", area.toString());
-        Route_Fragment route_fragment = new Route_Fragment();
+        RouteList_Fragment route_fragment = new RouteList_Fragment();
         route_fragment.setArguments(buns);
         getFragmentManager().beginTransaction().add(R.id.fragment, route_fragment).commit();
     }

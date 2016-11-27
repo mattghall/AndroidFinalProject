@@ -16,9 +16,9 @@ import org.json.JSONObject;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class Route_Fragment extends Fragment {
+public class RouteList_Fragment extends Fragment {
 
-    public Route_Fragment() {
+    public RouteList_Fragment() {
     }
 
     private String[] routeNames = { "Route A","Route B", "Route C","Route Error" };
