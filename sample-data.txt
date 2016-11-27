@@ -1,0 +1,114 @@
+{
+	"area-0": {
+		"area-id": "0",
+		"area-name": "test-area-0",
+		"trailhead-name": "test-trailhead",
+		"trailhead-gps": "000200020",
+		"routes": {
+			"route-0": {
+				"route-id": "0",
+				"route-name": "testroute",
+				"route-area": "area-0",
+				"route-difficulty": "5-9",
+				"route-img": "DCS 4320",
+				"anchors": {
+					"anchor-0": {
+						"anchor-num": "0",
+						"anchor-difficulty": "5-8",
+						"anchor-beta": "this is easy clip"
+					},
+					"anchor-1": {
+						"anchor-num": "1",
+						"anchor-difficulty": "5-8",
+						"anchor-beta": "this is easy clip"
+					},
+					"anchor-2": {
+						"anchor-num": "2",
+						"anchor-difficulty": "5-8",
+						"anchor-beta": "this is easy clip"
+					}
+				}
+			},
+			"route-1": {
+				"route-id": "1",
+				"route-name": "testroute",
+				"route-area": "area-0",
+				"route-difficulty": "5-9",
+				"route-img": "DCS 4320",
+				"anchors": {
+					"anchor-0": {
+						"anchor-num": "0",
+						"anchor-difficulty": "5-8",
+						"anchor-beta": "this is easy clip"
+					},
+					"anchor-1": {
+						"anchor-num": "1",
+						"anchor-difficulty": "5-8",
+						"anchor-beta": "this is easy clip"
+					},
+					"anchor-2": {
+						"anchor-num": "2",
+						"anchor-difficulty": "5-8",
+						"anchor-beta": "this is easy clip"
+					}
+				}
+			}
+		}
+	},
+	"area-1": {
+		"area-id": "1",
+		"area-name": "test-area-0",
+		"trailhead-name": "test-trailhead",
+		"trailhead-gps": "000200020",
+		"routes": {
+			"route-0": {
+				"route-id": "0",
+				"route-name": "testroute",
+				"route-area": "area-0",
+				"route-difficulty": "5-9",
+				"route-img": "DCS 4320",
+				"anchors": {
+					"anchor-0": {
+						"anchor-num": "0",
+						"anchor-difficulty": "5-8",
+						"anchor-beta": "this is easy clip"
+					},
+					"anchor-1": {
+						"anchor-num": "1",
+						"anchor-difficulty": "5-8",
+						"anchor-beta": "this is easy clip"
+					},
+					"anchor-2": {
+						"anchor-num": "2",
+						"anchor-difficulty": "5-8",
+						"anchor-beta": "this is easy clip"
+					}
+				}
+			},
+			"route-1": {
+				"route-id": "1",
+				"route-name": "testroute",
+				"route-area": "area-0",
+				"route-difficulty": "5-9",
+				"route-img": "DCS 4320",
+				"anchors": {
+					"anchor-0": {
+						"anchor-num": "0",
+						"anchor-difficulty": "5-8",
+						"anchor-beta": "this is easy clip"
+					},
+					"anchor-1": {
+						"anchor-num": "1",
+						"anchor-difficulty": "5-8",
+						"anchor-beta": "this is easy clip"
+					},
+					"anchor-2": {
+						"anchor-num": "2",
+						"anchor-difficulty": "5-8",
+						"anchor-beta": "this is easy clip"
+					}
+				}
+			}
+		}
+	}
+}
