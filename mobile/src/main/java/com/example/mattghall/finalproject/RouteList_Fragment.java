@@ -118,6 +118,7 @@ public class RouteList_Fragment extends Fragment {
     void OpenArea(String climbingAreaId, JSONObject area)
     {
         Intent in = new Intent(getActivity(),DetailsActivity.class);
+        //in.putExtra("route",area.toString());
         startActivity(in);
     }
 }

@@ -25,7 +25,6 @@ public class RouteDetails_Fragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class RouteDetails_Fragment extends Fragment {
         try {
             if(buns == null)
                 throw new Exception();
-            routeDetails = new JSONObject(buns.getString("area"));
+            routeDetails = new JSONObject(buns.getString("route"));
             anchors = GetAnchors(routeDetails);
         } catch (Exception e) {
             ToastMachine("Could not get routes");
