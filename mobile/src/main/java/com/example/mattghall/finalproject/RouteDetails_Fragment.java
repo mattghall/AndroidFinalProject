@@ -27,16 +27,8 @@ public class RouteDetails_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Bundle buns = this.getArguments();
-        try {
-            if(buns == null)
-                throw new Exception();
-            routeDetails = new JSONObject(buns.getString("route"));
-            anchors = GetAnchors(routeDetails);
-        } catch (Exception e) {
-            ToastMachine("Could not get routes");
-            e.printStackTrace();
-        }
+       DetailsActivity parentActivity = (DetailsActivity) getActivity();
+        routeDetails = parentActivity.GetDataTails();
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_route__details, container, false);
