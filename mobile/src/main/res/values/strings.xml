@@ -7,4 +7,21 @@
     <string name="climbing_areas_title">Climbing Areas</string>
     <string name="routes_title">Routes</string>
     <string name="title_activity_details">DetailsActivity</string>
+
+    <!-- Saved String Values -->
+    <string name="routeTitle" />
+    <string name="routeGPS" />
+    <string name="routeArea" />
+    <string name="routeDifficulty" />
+    <string name="routeNumAnchors" />
+
+    <!-- Details Page Labels -->
+    <string name="areaLabel">Climbing Area</string>
+    <string name="gpsLabel">GPS Coordinates</string>
+    <string name="difficultyLabel">Difficulty</string>
+    <string name="numAnchorsLabel">Number Anchors</string>
+
+    <string name="newAnchorLabel">New Anchor</string>
+    <string name="saveButtonLabel">Save</string>
+
 </resources>

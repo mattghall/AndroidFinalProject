@@ -30,6 +30,10 @@ public class RouteDetails_Fragment extends Fragment {
        DetailsActivity parentActivity = (DetailsActivity) getActivity();
         routeDetails = parentActivity.GetDataTails();
 
+        RouteDetailsClass RDC = new RouteDetailsClass(routeDetails);
+
+        ToastMachine(RDC.name);
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_route__details, container, false);
     }
@@ -55,6 +59,11 @@ public class RouteDetails_Fragment extends Fragment {
             ToastMachine(temp);
         }
         return achors;
+    }
+
+    void SetStringsForDetailsPage()
+    {
+
     }
 
 }

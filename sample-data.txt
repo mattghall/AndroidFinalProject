@@ -1,14 +1,15 @@
 {
 	"area-0": {
 		"area-id": "0",
-		"area-name": "test-area-0",
+		"area-name": "Sweet Climbin",
 		"trailhead-name": "test-trailhead",
 		"trailhead-gps": "000200020",
 		"routes": {
 			"route-0": {
 				"route-id": "0",
-				"route-name": "testroute",
+				"route-name": "Fun Route",
 				"route-area": "area-0",
+				"route-gps": "000000",
 				"route-difficulty": "5-9",
 				"route-img": "DCS 4320",
 				"anchors": {
@@ -31,8 +32,9 @@
 			},
 			"route-1": {
 				"route-id": "1",
-				"route-name": "testroute",
+				"route-name": "Sucky Route",
 				"route-area": "area-0",
+				"route-gps": "000000",
 				"route-difficulty": "5-9",
 				"route-img": "DCS 4320",
 				"anchors": {
@@ -57,14 +59,15 @@
 	},
 	"area-1": {
 		"area-id": "1",
-		"area-name": "test-area-0",
-		"trailhead-name": "test-trailhead",
+		"area-name": "Vertical World",
+		"trailhead-name": "Commodore Ave",
 		"trailhead-gps": "000200020",
 		"routes": {
 			"route-0": {
 				"route-id": "0",
-				"route-name": "testroute",
-				"route-area": "area-0",
+				"route-name": "The Crack",
+				"route-area": "area-1",
+				"route-gps": "000000",
 				"route-difficulty": "5-9",
 				"route-img": "DCS 4320",
 				"anchors": {
@@ -87,9 +90,10 @@
 			},
 			"route-1": {
 				"route-id": "1",
-				"route-name": "testroute",
-				"route-area": "area-0",
-				"route-difficulty": "5-9",
+				"route-name": "Slabin it",
+				"route-area": "area-1",
+				"route-gps": "000000",
+				"route-difficulty": "5-11c",
 				"route-img": "DCS 4320",
 				"anchors": {
 					"anchor-0": {
