@@ -5,12 +5,13 @@
         <variable name="RDC" type="com.example.mattghall.finalproject.RouteDetailsClass"/>
     </data>
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
             android:id="@+id/routeTitle"
-            android:layout_width="wrap_content"
+            style="@style/DetailsTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{RDC.name}" />
         <LinearLayout
@@ -19,11 +20,13 @@
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/areaTitleLabel"
+                style="@style/DetailsLabels"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/areaLabel" />
             <TextView
                 android:id="@+id/routeArea"
+                style="@style/DetailsValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{RDC.area}" />
@@ -34,11 +37,13 @@
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/gpsLabel"
+                style="@style/DetailsLabels"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/gpsLabel" />
             <TextView
                 android:id="@+id/routeGPS"
+                style="@style/DetailsValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{RDC.gps}" />
@@ -49,11 +54,13 @@
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/difficultyLabel"
+                style="@style/DetailsLabels"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/difficultyLabel" />
             <TextView
                 android:id="@+id/routeDifficulty"
+                style="@style/DetailsValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{RDC.difficulty}" />
@@ -64,11 +71,13 @@
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/numAnchorsLabel"
+                style="@style/DetailsLabels"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/numAnchorsLabel" />
             <TextView
                 android:id="@+id/routeNumAnchors"
+                style="@style/DetailsValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{RDC.numAnchors}" />
@@ -80,11 +89,13 @@
             <Button
                 android:id="@+id/newAnchorButton"
                 android:layout_width="wrap_content"
+                android:minWidth="150dp"
                 android:layout_height="wrap_content"
-                android:text="@string/newAnchorLabel" />
+                android:text="@string/editLabel" />
             <Button
                 android:id="@+id/saveButton"
                 android:layout_width="wrap_content"
+                android:minWidth="150dp"
                 android:layout_height="wrap_content"
                 android:text="@string/saveButtonLabel" />
         </LinearLayout>
