@@ -11,9 +11,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity {
+    JSONObject data;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

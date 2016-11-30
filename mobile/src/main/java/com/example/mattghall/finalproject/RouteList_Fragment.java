@@ -22,6 +22,7 @@ public class RouteList_Fragment extends Fragment {
     public RouteList_Fragment() {
     }
 
+    MainActivity mainActivity;
     private String[] routeNames = { "Route A","Route B", "Route C","Route Error" };
     private String[] routeIds = { "0","1","2" };
     private ListView routeListView;
@@ -31,6 +32,7 @@ public class RouteList_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mainActivity = (MainActivity)getActivity();
         Bundle buns = this.getArguments();
         try {
             if(buns == null)
@@ -54,10 +56,10 @@ public class RouteList_Fragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                if(routeIds.length > position && routeNames.length > position) {
-                   String msg = routeIds[position] + ": " + routeNames[position];
                    String temp = "route-" + String.valueOf(routeIds[position]);
                    try {
                        JSONObject route = areaData.getJSONObject("routes").getJSONObject(temp);
+                       route = mainActivity.data.getJSONObject(route.getString("route-area")).getJSONObject("routes").getJSONObject(temp);
                        OpenArea(route.getString("route-id"),route);
                    } catch (JSONException e) {
                        e.printStackTrace();
@@ -94,6 +96,7 @@ public class RouteList_Fragment extends Fragment {
         }
         return routeNames;
     }
+
 
     String [] GetRouteIds(JSONObject data) throws JSONException {
         String temp = "";
