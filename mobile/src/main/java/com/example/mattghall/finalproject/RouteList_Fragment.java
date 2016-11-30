@@ -1,6 +1,8 @@
 package com.example.mattghall.finalproject;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,6 +30,7 @@ public class RouteList_Fragment extends Fragment {
     private ListView routeListView;
     private ArrayAdapter arrayAdapter;
     JSONObject areaData = null;
+    ClimbingAreaClass climbingAreaClass = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,14 +41,20 @@ public class RouteList_Fragment extends Fragment {
             if(buns == null)
                 throw new Exception();
             areaData = new JSONObject(buns.getString("area"));
+            climbingAreaClass = new ClimbingAreaClass(areaData);
             routeNames = GetRouteNames(areaData);
             routeIds = GetRouteIds(areaData);
+
         } catch (Exception e) {
             ToastMachine("Could not get routes");
             e.printStackTrace();
         }
 
-        View fragmentView = inflater.inflate(R.layout.fragment_routes,container,false);
+        ViewDataBinding binding = DataBindingUtil.inflate(inflater,R.layout.fragment_routes,container,false);
+        View fragmentView = binding.getRoot();
+        binding.setVariable(BR.areaData,climbingAreaClass);
+
+        //View fragmentView = inflater.inflate(R.layout.fragment_routes,container,false);
 
         routeListView = (ListView) fragmentView.findViewById(R.id.routes_listview);
 
@@ -71,6 +80,8 @@ public class RouteList_Fragment extends Fragment {
                }
             }
         });
+
+
         return fragmentView;
     }
 

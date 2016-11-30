@@ -16,6 +16,10 @@
 
     <string name="editLabel">Edit</string>
     <string name="saveButtonLabel">Save</string>
+    <string name="areaNameLabel">Area Name</string>
+    <string name="areaIdLabel">Area ID</string>
+    <string name="trailHeadNameLabel">Trail Head</string>
+    <string name="gpsCoordinatesLabel">GPS Coordinates</string>
 
 
 </resources>
