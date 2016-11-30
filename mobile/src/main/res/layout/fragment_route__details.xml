@@ -28,7 +28,7 @@
             <TextView
                 android:id="@+id/routeArea"
                 style="@style/DetailsValue"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{RDC.area}" />
         </LinearLayout>
@@ -45,7 +45,7 @@
             <TextView
                 android:id="@+id/routeGPS"
                 style="@style/DetailsValue"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{RDC.gps}" />
         </LinearLayout>
@@ -62,7 +62,7 @@
             <TextView
                 android:id="@+id/routeDifficulty"
                 style="@style/DetailsValue"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{RDC.difficulty}" />
         </LinearLayout>
@@ -79,23 +79,26 @@
             <TextView
                 android:id="@+id/routeNumAnchors"
                 style="@style/DetailsValue"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{RDC.numAnchors}" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/editButton"
                 android:layout_width="wrap_content"
+                android:layout_weight=".5"
                 android:minWidth="150dp"
                 android:layout_height="wrap_content"
                 android:text="@string/editLabel" />
             <Button
                 android:id="@+id/saveButton"
                 android:layout_width="wrap_content"
+                android:layout_weight=".5"
                 android:minWidth="150dp"
                 android:layout_height="wrap_content"
                 android:text="@string/saveButtonLabel" />
