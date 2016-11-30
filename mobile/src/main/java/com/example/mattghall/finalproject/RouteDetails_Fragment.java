@@ -1,7 +1,10 @@
 package com.example.mattghall.finalproject;
 
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,12 +28,15 @@ public class RouteDetails_Fragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-       DetailsActivity parentActivity = (DetailsActivity) getActivity();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        DetailsActivity parentActivity = (DetailsActivity) getActivity();
         routeDetails = parentActivity.GetDataTails();
 
         RouteDetailsClass RDC = new RouteDetailsClass(routeDetails);
+
+        // Thanks Android Studio Documentation for leaving me to figure this out completely on my own and not thinking to update your documentation at all
+        ViewDataBinding binding = DataBindingUtil.setContentView(getActivity(), R.layout.fragment_route__details);
+        binding.setVariable(BR.RDC, RDC);
 
         ToastMachine(RDC.name);
 
