@@ -8,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DetailsActivity extends FragmentActivity {
-
     JSONObject datatails = null;
 
     @Override

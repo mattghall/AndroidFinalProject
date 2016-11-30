@@ -35,10 +35,8 @@ public class RouteDetails_Fragment extends Fragment {
         RouteDetailsClass RDC = new RouteDetailsClass(routeDetails);
 
         // Thanks Android Studio Documentation for leaving me to figure this out completely on my own and not thinking to update your documentation at all
-        ViewDataBinding binding = DataBindingUtil.setContentView(getActivity(), R.layout.fragment_route__details);
+        ViewDataBinding binding = DataBindingUtil.setContentView(parentActivity, R.layout.fragment_route__details);
         binding.setVariable(BR.RDC, RDC);
-
-        ToastMachine(RDC.name);
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_route__details, container, false);
@@ -65,11 +63,6 @@ public class RouteDetails_Fragment extends Fragment {
             ToastMachine(temp);
         }
         return achors;
-    }
-
-    void SetStringsForDetailsPage()
-    {
-
     }
 
 }
