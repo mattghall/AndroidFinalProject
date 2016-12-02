@@ -27,9 +27,12 @@ import java.io.FileOutputStream;
  * A simple {@link Fragment} subclass.
  */
 public class RouteDetails_Fragment extends Fragment implements View.OnClickListener {
-    String FILENAME = "data_file";
     JSONObject routeDetails = null;
-    String [] anchors = null;
+    String FILENAME = "data_file";
+    private String[] anchorNames = new String[0];
+    private String[] anchorIds = new String[0];
+    private String[] anchorBeta = new String[0];
+    AnchorClass [] anchors = null;
 
     public RouteDetails_Fragment() {
         // Required empty public constructor
@@ -41,6 +44,14 @@ public class RouteDetails_Fragment extends Fragment implements View.OnClickListe
         DetailsActivity parentActivity = (DetailsActivity) getActivity();
         routeDetails = parentActivity.GetDataTails();
         RouteDetailsClass RDC = new RouteDetailsClass(routeDetails);
+
+        // Get The Anchor Stuff
+        try {
+            anchors = GetAnchors(routeDetails.getJSONObject("anchors"));
+        } catch (JSONException e) {
+            ToastMachine("Could not load anchors");
+            e.printStackTrace();
+        }
 
         // Thanks Android Studio Documentation for leaving me to figure this out completely on my own and not thinking to update your documentation at all
         // Set the binding
@@ -153,27 +164,26 @@ public class RouteDetails_Fragment extends Fragment implements View.OnClickListe
         return false;
     }
 
+    AnchorClass [] GetAnchors(JSONObject data) throws JSONException {
+        String temp = "";
+        AnchorClass obj = null;
+        int l = data.length();
+
+        AnchorClass[] anchors = new AnchorClass[l];
+
+        for(int i = 0; i < l; i++)
+        {
+            temp = "anchor-" + String.valueOf(i);
+            obj = new AnchorClass(data.getJSONObject(temp));
+            anchors[i] = obj;
+        }
+        return anchors;
+    }
+
 
     void ToastMachine(String msg){
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(getContext(), msg, duration);
         toast.show();
-    }
-
-    String[] GetAnchors(JSONObject routeDetails) throws JSONException {
-        String temp = "";
-        JSONObject obj = null;
-
-        int l = routeDetails.getJSONObject("anchors").length();
-
-        String[] achors = new String[l];
-
-        for(int i = 0; i < l; i++)
-        {
-            temp = obj.getString("anchor-name");
-            anchors[i] = temp;
-            ToastMachine(temp);
-        }
-        return achors;
     }
 }

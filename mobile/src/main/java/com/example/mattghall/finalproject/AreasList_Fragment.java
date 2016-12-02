@@ -29,8 +29,8 @@ public class AreasList_Fragment extends Fragment {
 
     MainActivity mainActivity;
     private String[] climbingAreaNames = new String[0];
-    private String[] defaultAreas = {"No Areas Found"};
     private String[] climbingAreaIds = new String[0];
+    private String[] defaultAreas = {"No Areas Found"};
     private String[] defaultIds = {"-1"};
     private ListView climbingAreaListView;
     private ArrayAdapter arrayAdapter;
@@ -151,7 +151,6 @@ public class AreasList_Fragment extends Fragment {
             temp = obj.getString("area-id");
             areaIds[i] = temp;
         }
-
         return areaIds;
     }
 
