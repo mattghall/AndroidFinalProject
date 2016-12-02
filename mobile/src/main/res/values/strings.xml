@@ -21,6 +21,7 @@
     <string name="trailHeadNameLabel">Trail Head</string>
     <string name="gpsCoordinatesLabel">GPS Coordinates</string>
     <string name="anchorLabel">Anchors:</string>
+    <string name="routeTitlePrompt">Route Title</string>
 
 
 </resources>

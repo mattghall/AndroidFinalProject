@@ -54,8 +54,6 @@ public class RouteList_Fragment extends Fragment {
         View fragmentView = binding.getRoot();
         binding.setVariable(BR.areaData,climbingAreaClass);
 
-        //View fragmentView = inflater.inflate(R.layout.fragment_routes,container,false);
-
         routeListView = (ListView) fragmentView.findViewById(R.id.routes_listview);
 
         arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, routeNames);
@@ -69,7 +67,7 @@ public class RouteList_Fragment extends Fragment {
                    try {
                        JSONObject route = areaData.getJSONObject("routes").getJSONObject(temp);
                        route = mainActivity.data.getJSONObject(route.getString("route-area")).getJSONObject("routes").getJSONObject(temp);
-                       OpenArea(route.getString("route-id"),route);
+                       OpenRoute(route.getString("route-id"),route);
                    } catch (JSONException e) {
                        e.printStackTrace();
                    }
@@ -126,7 +124,7 @@ public class RouteList_Fragment extends Fragment {
 
         return routeIds;
     }
-    void OpenArea(String climbingAreaId, JSONObject area)
+    void OpenRoute(String climbingAreaId, JSONObject area)
     {
         Intent in = new Intent(getActivity(),DetailsActivity.class);
         String putme = area.toString();

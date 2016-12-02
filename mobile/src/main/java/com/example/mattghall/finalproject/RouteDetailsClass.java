@@ -8,6 +8,7 @@ import org.json.JSONObject;
  */
 
 public class RouteDetailsClass {
+    public String id;
     public String name;
     public String area;
     public String gps;
@@ -18,6 +19,7 @@ public class RouteDetailsClass {
     // Constructor made from passing in JSONObject of the route
     public RouteDetailsClass(JSONObject data) {
         try {
+            this.id = data.getString("route-id");
             this.name = data.getString("route-name");
             this.area = data.getString("route-area");
             this.gps = data.getString("route-gps");

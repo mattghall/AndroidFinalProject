@@ -1,6 +1,7 @@
 package com.example.mattghall.finalproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastMachine("Add");
+                CreateNewRoute();
             }
         });
 
@@ -84,6 +85,13 @@ public class MainActivity extends AppCompatActivity {
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(getApplicationContext(), msg, duration);
         toast.show();
+    }
+
+    void CreateNewRoute()
+    {
+        Intent in = new Intent(this,EditRouteActivity.class);
+        in.putExtra("isNew", true);
+        startActivity(in);
     }
 
 }

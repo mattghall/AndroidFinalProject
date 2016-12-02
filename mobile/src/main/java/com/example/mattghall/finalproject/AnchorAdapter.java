@@ -13,6 +13,7 @@ public class AnchorAdapter extends BaseAdapter{
     AnchorClass [] result;
     Context context;
     private static LayoutInflater inflater=null;
+
     public AnchorAdapter(RouteDetails_Fragment mainActivity, AnchorClass [] anchors) {
         // TODO Auto-generated constructor stub
         result=anchors;
@@ -20,6 +21,16 @@ public class AnchorAdapter extends BaseAdapter{
         inflater = ( LayoutInflater )context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+
+    public AnchorAdapter(EditRoute_Fragment mainActivity, AnchorClass [] anchors) {
+        // TODO Auto-generated constructor stub
+        result=anchors;
+        context=mainActivity.getContext();
+        inflater = ( LayoutInflater )context.
+                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+
     @Override
     public int getCount() {
         // TODO Auto-generated method stub

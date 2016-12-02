@@ -20,8 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AreasList_Fragment" />
         <activity android:name=".DetailsActivity"></activity>
+        <activity android:name=".EditRouteActivity"></activity>
     </application>
 
 </manifest>

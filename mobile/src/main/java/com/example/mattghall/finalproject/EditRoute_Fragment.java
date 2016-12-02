@@ -1,15 +1,10 @@
 package com.example.mattghall.finalproject;
 
-import android.app.FragmentTransaction;
+import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.support.annotation.LayoutRes;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,52 +14,57 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.mattghall.finalproject.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RouteDetails_Fragment extends Fragment implements View.OnClickListener {
+public class EditRoute_Fragment extends Fragment implements View.OnClickListener {
+    JSONObject datera = null;
     JSONObject routeDetails = null;
     String FILENAME = "data_file";
     private ListView anchorListView;
     private ArrayAdapter arrayAdapter;
-    RouteDetailsClass RDC;
+    EditRouteActivity parentActivity;
 
-    public RouteDetails_Fragment() {
+    public EditRoute_Fragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Initialize the form and get all the daters and stuff
-        DetailsActivity parentActivity = (DetailsActivity) getActivity();
-        routeDetails = parentActivity.GetDataTails();
-        RDC = new RouteDetailsClass(routeDetails);
+        parentActivity = (EditRouteActivity) getActivity();
+        datera = parentActivity.GetDataTails();
 
-        // Thanks Android Studio Documentation for leaving me to figure this out completely on my own and not thinking to update your documentation at all
-        // Set the binding
-        ViewDataBinding binding = DataBindingUtil.inflate(inflater,R.layout.fragment_route__details,container,false);
-        View eternalAnger = binding.getRoot();
-        binding.setVariable(BR.RDC,RDC);
-        binding.setVariable(BR.DataFile,routeDetails.toString());
+        View eternalAnger;
 
-        // Anchors and stuff
-        anchorListView = (ListView) eternalAnger.findViewById(R.id.anchors_listview);
-        anchorListView.setAdapter(new AnchorAdapter(this,RDC.anchors));
+        if(parentActivity.isNew) {
+            eternalAnger = inflater.inflate(R.layout.fragment_edit_route, container, false);
+        }
+        else {
+            routeDetails = GetRoute(datera);
+            RouteDetailsClass RDC = new RouteDetailsClass(routeDetails);
 
-        // Set OnClickListeners
-        final Button editButton = (Button) eternalAnger.findViewById(R.id.editButton);
-        editButton.setOnClickListener(this);
-        final Button saveButton = (Button) eternalAnger.findViewById(R.id.saveButton);
-        saveButton.setOnClickListener(this);
+            // Thanks Android Studio Documentation for leaving me to figure this out completely on my own and not thinking to update your documentation at all
+            // Set the binding
+            ViewDataBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_route, container, false);
+            eternalAnger = binding.getRoot();
+            binding.setVariable(BR.RDC, RDC);
+            binding.setVariable(BR.DataFile, routeDetails.toString());
+
+            // Anchors and stuff
+            anchorListView = (ListView) eternalAnger.findViewById(R.id.anchors_listview);
+            anchorListView.setAdapter(new AnchorAdapter(this, RDC.anchors));
+
+            // Set OnClickListeners
+            final Button saveButton = (Button) eternalAnger.findViewById(R.id.saveButton);
+            saveButton.setOnClickListener(this);
+        }
 
         return eternalAnger;
     }
@@ -72,9 +72,6 @@ public class RouteDetails_Fragment extends Fragment implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.editButton :
-                EditRoute();
-                break;
             case R.id.saveButton :
                 TrySaveData();
                 break;
@@ -163,13 +160,17 @@ public class RouteDetails_Fragment extends Fragment implements View.OnClickListe
         return false;
     }
 
-    void EditRoute()
+    JSONObject GetRoute(JSONObject dates)
     {
-        Intent in = new Intent(getActivity(),EditRouteActivity.class);
-        in.putExtra("isNew", false);
-        in.putExtra("area-id",RDC.area);
-        in.putExtra("route-id",RDC.id);
-        startActivity(in);
+        try {
+            JSONObject a = dates.getJSONObject(parentActivity.areaId);
+            JSONObject r = a.getJSONObject("routes");
+            a= r.getJSONObject("route-" + parentActivity.routeId);
+            return a;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return new JSONObject();
+        }
     }
 
     void ToastMachine(String msg){
