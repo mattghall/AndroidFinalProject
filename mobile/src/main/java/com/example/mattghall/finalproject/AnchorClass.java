@@ -29,6 +29,8 @@ public class AnchorClass {
 
     @Override
     public String toString(){
-        return "anchor-" + this.id + ". Difficulty: " + this.difficulty + ". Beta: " + this.beta;
+        return "anchor-" + this.id + ". Difficulty: " + this.difficulty + ". \nBeta: " + this.beta;
     }
+
+
 }

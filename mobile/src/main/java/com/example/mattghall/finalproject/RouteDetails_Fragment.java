@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.LayoutRes;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +36,8 @@ public class RouteDetails_Fragment extends Fragment implements View.OnClickListe
     private ListView anchorListView;
     private ArrayAdapter arrayAdapter;
 
+    public static String [] prgmNameList={"Let Us C","c++","JAVA","Jsp","Microsoft .Net","Android","PHP","Jquery","JavaScript"};
+
 
     public RouteDetails_Fragment() {
         // Required empty public constructor
@@ -56,8 +59,9 @@ public class RouteDetails_Fragment extends Fragment implements View.OnClickListe
 
         // Anchors and stuff
         anchorListView = (ListView) eternalAnger.findViewById(R.id.anchors_listview);
-        arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, RDC.anchors);
-        anchorListView.setAdapter(arrayAdapter);
+        //arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, RDC.anchors);
+        //anchorListView.setAdapter(arrayAdapter);
+        anchorListView.setAdapter(new AnchorAdapter(this,RDC.anchors));
 
         // Set OnClickListeners
         final Button editButton = (Button) eternalAnger.findViewById(R.id.editButton);

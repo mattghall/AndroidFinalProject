@@ -13,14 +13,6 @@ public class ClimbingAreaClass {
     public String trailHeadName;
     public String trailHeadGPS;
 
-    public ClimbingAreaClass(String id, String name, String trailHeadName, String trailHeadGPS) {
-        this.id = id;
-        this.name = name;
-        this.trailHeadName = trailHeadName;
-        this.trailHeadGPS = trailHeadGPS;
-    }
-
-
     public ClimbingAreaClass(JSONObject area) {
         try {
             this.id = area.getString("area-id");

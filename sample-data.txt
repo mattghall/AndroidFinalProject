@@ -62,6 +62,17 @@
 						"anchor-num": "4",
 						"anchor-difficulty": "5-10b",
 						"anchor-beta": "All the clips are dinos... :/"
+					},
+					"anchor-4": {
+						"anchor-num": "4",
+						"anchor-difficulty": "5-12b",
+						"anchor-beta": "Why am I evn climbing this? MAybe I should start to rethink my activities. Maybe I'll take out a safer sport like... knitting? Knitting is cool right?"
+					}
+					,
+					"anchor-5": {
+						"anchor-num": "5",
+						"anchor-difficulty": "5-12b",
+						"anchor-beta": "GOOD NEWS! I have officially learned how to knit and have joined the knitting club!"
 					}
 				}
 			}
