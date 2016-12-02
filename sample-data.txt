@@ -21,12 +21,12 @@
 					"anchor-1": {
 						"anchor-num": "1",
 						"anchor-difficulty": "5-8",
-						"anchor-beta": "this is easy clip"
+						"anchor-beta": "reach for the rock"
 					},
 					"anchor-2": {
 						"anchor-num": "2",
 						"anchor-difficulty": "5-8",
-						"anchor-beta": "this is easy clip"
+						"anchor-beta": "dino to the finish"
 					}
 				}
 			},
@@ -40,18 +40,28 @@
 				"anchors": {
 					"anchor-0": {
 						"anchor-num": "0",
-						"anchor-difficulty": "5-8",
-						"anchor-beta": "this is easy clip"
+						"anchor-difficulty": "5-10d",
+						"anchor-beta": "first clip's a dino"
 					},
 					"anchor-1": {
 						"anchor-num": "1",
-						"anchor-difficulty": "5-8",
-						"anchor-beta": "this is easy clip"
+						"anchor-difficulty": "5-10c",
+						"anchor-beta": "second clip's a dino"
 					},
 					"anchor-2": {
 						"anchor-num": "2",
-						"anchor-difficulty": "5-8",
-						"anchor-beta": "this is easy clip"
+						"anchor-difficulty": "5-11a",
+						"anchor-beta": "wait, this one's also a dino"
+					},
+					"anchor-3": {
+						"anchor-num": "3",
+						"anchor-difficulty": "5-10b",
+						"anchor-beta": "wait, this one's also a dino"
+					},
+					"anchor-4": {
+						"anchor-num": "4",
+						"anchor-difficulty": "5-10b",
+						"anchor-beta": "All the clips are dinos... :/"
 					}
 				}
 			}
@@ -78,13 +88,13 @@
 					},
 					"anchor-1": {
 						"anchor-num": "1",
-						"anchor-difficulty": "5-8",
-						"anchor-beta": "this is easy clip"
+						"anchor-difficulty": "5-13",
+						"anchor-beta": "this is a hard clip"
 					},
 					"anchor-2": {
 						"anchor-num": "2",
-						"anchor-difficulty": "5-8",
-						"anchor-beta": "this is easy clip"
+						"anchor-difficulty": "5-19",
+						"anchor-beta": "this is not a clip"
 					}
 				}
 			},
@@ -98,18 +108,18 @@
 				"anchors": {
 					"anchor-0": {
 						"anchor-num": "0",
-						"anchor-difficulty": "5-8",
-						"anchor-beta": "this is easy clip"
+						"anchor-difficulty": "5-6",
+						"anchor-beta": "this is an easy clip"
 					},
 					"anchor-1": {
 						"anchor-num": "1",
-						"anchor-difficulty": "5-8",
-						"anchor-beta": "this is easy clip"
+						"anchor-difficulty": "5-7",
+						"anchor-beta": "this is also an easy clip"
 					},
 					"anchor-2": {
 						"anchor-num": "2",
-						"anchor-difficulty": "5-8",
-						"anchor-beta": "this is easy clip"
+						"anchor-difficulty": "5-4",
+						"anchor-beta": "I literally walked to this one"
 					}
 				}
 			}

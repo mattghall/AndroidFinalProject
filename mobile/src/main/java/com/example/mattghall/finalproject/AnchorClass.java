@@ -26,4 +26,9 @@ public class AnchorClass {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String toString(){
+        return "anchor-" + this.id + ". Difficulty: " + this.difficulty + ". Beta: " + this.beta;
+    }
 }

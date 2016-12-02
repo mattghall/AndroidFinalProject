@@ -13,7 +13,7 @@ public class RouteDetailsClass {
     public String gps;
     public String difficulty;
     public String numAnchors;
-
+    public AnchorClass [] anchors;
 
     // Constructor made from passing in JSONObject of the route
     public RouteDetailsClass(JSONObject data) {
@@ -23,8 +23,26 @@ public class RouteDetailsClass {
             this.gps = data.getString("route-gps");
             this.difficulty = data.getString("route-difficulty");
             this.numAnchors = String.valueOf(data.getJSONObject("anchors").length());
+            this.anchors = GetAnchors(data.getJSONObject("anchors"));
+            this.name = this.name + "";
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    AnchorClass [] GetAnchors(JSONObject data) throws JSONException {
+        String temp = "";
+        AnchorClass obj = null;
+        int l = data.length();
+
+        AnchorClass[] anchors = new AnchorClass[l];
+
+        for(int i = 0; i < l; i++)
+        {
+            temp = "anchor-" + String.valueOf(i);
+            obj = new AnchorClass(data.getJSONObject(temp));
+            anchors[i] = obj;
+        }
+        return anchors;
     }
 }

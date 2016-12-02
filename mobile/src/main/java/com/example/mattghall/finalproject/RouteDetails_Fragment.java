@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.mattghall.finalproject.R;
@@ -22,6 +24,7 @@ import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,10 +32,9 @@ import java.io.FileOutputStream;
 public class RouteDetails_Fragment extends Fragment implements View.OnClickListener {
     JSONObject routeDetails = null;
     String FILENAME = "data_file";
-    private String[] anchorNames = new String[0];
-    private String[] anchorIds = new String[0];
-    private String[] anchorBeta = new String[0];
-    AnchorClass [] anchors = null;
+    private ListView anchorListView;
+    private ArrayAdapter arrayAdapter;
+
 
     public RouteDetails_Fragment() {
         // Required empty public constructor
@@ -45,20 +47,17 @@ public class RouteDetails_Fragment extends Fragment implements View.OnClickListe
         routeDetails = parentActivity.GetDataTails();
         RouteDetailsClass RDC = new RouteDetailsClass(routeDetails);
 
-        // Get The Anchor Stuff
-        try {
-            anchors = GetAnchors(routeDetails.getJSONObject("anchors"));
-        } catch (JSONException e) {
-            ToastMachine("Could not load anchors");
-            e.printStackTrace();
-        }
-
         // Thanks Android Studio Documentation for leaving me to figure this out completely on my own and not thinking to update your documentation at all
         // Set the binding
         ViewDataBinding binding = DataBindingUtil.inflate(inflater,R.layout.fragment_route__details,container,false);
         View eternalAnger = binding.getRoot();
         binding.setVariable(BR.RDC,RDC);
         binding.setVariable(BR.DataFile,routeDetails.toString());
+
+        // Anchors and stuff
+        anchorListView = (ListView) eternalAnger.findViewById(R.id.anchors_listview);
+        arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, RDC.anchors);
+        anchorListView.setAdapter(arrayAdapter);
 
         // Set OnClickListeners
         final Button editButton = (Button) eternalAnger.findViewById(R.id.editButton);
@@ -164,21 +163,6 @@ public class RouteDetails_Fragment extends Fragment implements View.OnClickListe
         return false;
     }
 
-    AnchorClass [] GetAnchors(JSONObject data) throws JSONException {
-        String temp = "";
-        AnchorClass obj = null;
-        int l = data.length();
-
-        AnchorClass[] anchors = new AnchorClass[l];
-
-        for(int i = 0; i < l; i++)
-        {
-            temp = "anchor-" + String.valueOf(i);
-            obj = new AnchorClass(data.getJSONObject(temp));
-            anchors[i] = obj;
-        }
-        return anchors;
-    }
 
 
     void ToastMachine(String msg){

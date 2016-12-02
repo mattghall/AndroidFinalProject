@@ -20,6 +20,7 @@
     <string name="areaIdLabel">Area ID</string>
     <string name="trailHeadNameLabel">Trail Head</string>
     <string name="gpsCoordinatesLabel">GPS Coordinates</string>
+    <string name="anchorLabel">Anchors:</string>
 
 
 </resources>
