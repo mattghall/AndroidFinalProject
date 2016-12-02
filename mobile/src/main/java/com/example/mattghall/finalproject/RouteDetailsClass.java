@@ -30,7 +30,7 @@ public class RouteDetailsClass {
         }
     }
 
-    AnchorClass [] GetAnchors(JSONObject data) throws JSONException {
+    private AnchorClass [] GetAnchors(JSONObject data) throws JSONException {
         String temp = "";
         AnchorClass obj = null;
         int l = data.length();

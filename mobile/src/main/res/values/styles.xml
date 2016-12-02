@@ -44,4 +44,20 @@
         <item name="android:paddingRight">10dp</item>
     </style>
 
+    <style name="anchorLabel">
+
+    </style>
+
+    <style name="anchorValue">
+
+    </style>
+
+    <style name="anchorListViewCell">
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="anchorBeta">
+        <item name="android:textAlignment">textEnd</item>
+    </style>
+
 </resources>
