@@ -17,7 +17,7 @@ public class EditRouteActivity extends FragmentActivity {
     public String routeId;
     public boolean isNew;
 
-
+    // TODO Use Dialog box for Anchors?
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

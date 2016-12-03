@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FinalProject</string>
+    <string name="app_name">Climb Book</string>
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -22,6 +22,7 @@
     <string name="gpsCoordinatesLabel">GPS Coordinates</string>
     <string name="anchorLabel">Anchors:</string>
     <string name="routeTitlePrompt">Route Title</string>
+    <string name="addAnchorButton">Add Anchor</string>
 
 
 </resources>

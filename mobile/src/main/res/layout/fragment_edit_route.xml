@@ -93,6 +93,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/anchorLabel" />
+            <Button
+                android:id="@+id/addAnchorButton"
+                android:layout_width="wrap_content"
+                android:layout_weight=".5"
+                android:minWidth="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/addAnchorButton" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,7 +108,7 @@
             <ListView
                 android:id="@+id/anchors_listview"
                 android:layout_width="match_parent"
-                android:layout_height="410dp"/>
+                android:layout_height="350dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
