@@ -23,4 +23,5 @@ public class ClimbingAreaClass {
             e.printStackTrace();
         }
     }
+
 }

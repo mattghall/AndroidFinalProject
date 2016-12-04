@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,6 +30,8 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
     private ArrayAdapter arrayAdapter;
     EditRouteActivity parentActivity;
 
+    RouteDetailsClass RDC;
+
     public EditRoute_Fragment() {
         // Required empty public constructor
     }
@@ -48,7 +49,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
         }
         else {
             routeDetails = GetRoute(datera);
-            RouteDetailsClass RDC = new RouteDetailsClass(routeDetails);
+            RDC = new RouteDetailsClass(routeDetails);
 
             // Thanks Android Studio Documentation for leaving me to figure this out completely on my own and not thinking to update your documentation at all
             // Set the binding
@@ -82,19 +83,16 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
     }
 
     public void TrySaveData(){
-        EditText editText = (EditText) getView().findViewById(R.id.dataFileText);
-        // Check to see if Valid JSON
         try {
-            JSONObject newData = new JSONObject(editText.getText().toString());
-            SaveData(newData);
-            editText.setVisibility(View.INVISIBLE);
+            JSONObject newRoute = RDC.GetJSON();
+            SaveRoute(newRoute);
         } catch (JSONException e) {
-            ToastMachine("Data is invalid. Try again");
+            ToastMachine("Could not Save Route");
             e.printStackTrace();
         }
     }
 
-    public void SaveData (JSONObject newRouteDetails)
+    public void SaveRoute(JSONObject newRouteDetails)
     {
         JSONObject oldData = ReadDaters();
         try {

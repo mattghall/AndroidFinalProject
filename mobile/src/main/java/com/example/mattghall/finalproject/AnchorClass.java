@@ -27,10 +27,21 @@ public class AnchorClass {
         }
     }
 
+    public AnchorClass(String _id, String _difficulty, String _beta)
+    {
+        this.id = _id;
+        this.difficulty = _difficulty;
+        this.beta = _beta;
+    }
+
     @Override
     public String toString(){
         return "anchor-" + this.id + ". Difficulty: " + this.difficulty + ". \nBeta: " + this.beta;
     }
 
 
+    public String GetJSONString() throws JSONException {
+        String json = "\"anchor-" + this.id + "\": { \"anchor-num\": \"" + this.id + "\", \"anchor-difficulty\": \"" + this.difficulty + "\", \"anchor-beta\": \"" + this.beta + "\" }";
+        return json;
+    }
 }
