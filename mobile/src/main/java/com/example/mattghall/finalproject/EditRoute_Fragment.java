@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -32,6 +34,14 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
 
     RouteDetailsClass RDC;
 
+    EditText titleEdit;
+    EditText gpsEdit;
+    EditText difficultyEdit;
+    EditText anchorDifficultyEdit;
+    EditText anchorBetaEdit;
+    EditText areaEdit;
+    TextView areaTextView;
+
     public EditRoute_Fragment() {
         // Required empty public constructor
     }
@@ -44,6 +54,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
 
         View eternalAnger;
 
+        // SEt view and load data if available
         if(parentActivity.isNew) {
             eternalAnger = inflater.inflate(R.layout.fragment_edit_route, container, false);
         }
@@ -57,14 +68,38 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
             eternalAnger = binding.getRoot();
             binding.setVariable(BR.RDC, RDC);
             binding.setVariable(BR.DataFile, routeDetails.toString());
+        }
 
-            // Anchors and stuff
-            anchorListView = (ListView) eternalAnger.findViewById(R.id.anchors_listview);
+        // Set OnClickListeners
+        final Button saveButton = (Button) eternalAnger.findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(this);
+        final Button addAnchorButton = (Button) eternalAnger.findViewById(R.id.addAnchorButton);
+        addAnchorButton.setOnClickListener(this);
+
+        // Reference lovely EditTexts
+        titleEdit = (EditText)eternalAnger.findViewById(R.id.routeTitle);
+        gpsEdit = (EditText)eternalAnger.findViewById(R.id.routeGPS);
+        difficultyEdit = (EditText)eternalAnger.findViewById(R.id.routeDifficulty);
+        anchorDifficultyEdit = (EditText)eternalAnger.findViewById(R.id.newAnchorDifficulty);
+        anchorBetaEdit = (EditText)eternalAnger.findViewById(R.id.newAnchorBeta);
+        areaEdit = (EditText)eternalAnger.findViewById(R.id.routeAreaEditText);
+        areaTextView = (TextView)eternalAnger.findViewById(R.id.routeAreaTextView);
+
+        // Anchors and stuff
+        anchorListView = (ListView) eternalAnger.findViewById(R.id.anchors_listview);
+
+
+        // Special Bindings
+        if(parentActivity.isNew) {
+            // SEt title prompt
+            titleEdit.setText(R.string.routeTitlePrompt);
+            areaTextView.setVisibility(View.GONE);
+        }
+        else
+        {
+            // Load anchors
             anchorListView.setAdapter(new AnchorAdapter(this, RDC.anchors));
-
-            // Set OnClickListeners
-            final Button saveButton = (Button) eternalAnger.findViewById(R.id.saveButton);
-            saveButton.setOnClickListener(this);
+            areaEdit.setVisibility(View.GONE);
         }
 
         return eternalAnger;
@@ -74,7 +109,10 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.saveButton :
-                TrySaveData();
+                UpdateRouteDetails();
+                break;
+            case R.id.addAnchorButton:
+                AddNewAnchor(anchorDifficultyEdit.getText().toString(),anchorBetaEdit.getText().toString());
                 break;
             default:
                 ToastMachine("ERRRRRROR");
@@ -82,14 +120,41 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
         }
     }
 
+    private void UpdateRouteDetails() {
+        RDC.name = titleEdit.getText().toString();
+        RDC.gps = gpsEdit.getText().toString();
+        RDC.difficulty = difficultyEdit.getText().toString();
+
+        TrySaveData();
+    }
+
+    private void AddNewAnchor(String _difficulty, String _beta)
+    {
+        if(RDC == null)
+        {
+            ToastMachine("Please save route details before adding anchors");
+        }
+        else {
+            RDC.AddAnchor(_difficulty, _beta);
+            TrySaveData();
+        }
+    }
+
     public void TrySaveData(){
         try {
             JSONObject newRoute = RDC.GetJSON();
             SaveRoute(newRoute);
+            RestartActivity();
         } catch (JSONException e) {
             ToastMachine("Could not Save Route");
             e.printStackTrace();
         }
+    }
+
+    private void RestartActivity() {
+        // Restart Activity
+        getActivity().finish();
+        startActivity(getActivity().getIntent());
     }
 
     public void SaveRoute(JSONObject newRouteDetails)

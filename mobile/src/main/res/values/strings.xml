@@ -23,6 +23,7 @@
     <string name="anchorLabel">Anchors:</string>
     <string name="routeTitlePrompt">Route Title</string>
     <string name="addAnchorButton">Add Anchor</string>
+    <string name="betaLabel">Beta</string>
 
 
 </resources>

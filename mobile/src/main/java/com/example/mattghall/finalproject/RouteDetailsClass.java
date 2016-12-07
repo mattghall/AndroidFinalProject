@@ -9,6 +9,11 @@ import org.json.JSONObject;
 
 public class RouteDetailsClass {
     public String id;
+
+    public String getFullId() {
+        return "route-" + id;
+    }
+
     public String name;
     public String area;
     public String gps;
