@@ -133,7 +133,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
     private void SaveNewRoute() {
         RDC = new RouteDetailsClass();
         RDC.name = titleEdit.getText().toString();
-        RDC.area = ((ClimbingAreaClass)areaSpinner.getSelectedItem()).id;
+        RDC.area = "area-" + ((ClimbingAreaClass)areaSpinner.getSelectedItem()).id;
         RDC.gps = gpsEdit.getText().toString();
         RDC.difficulty = difficultyEdit.getText().toString();
         AddNewRoute(RDC);
@@ -143,7 +143,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
         JSONObject oldData = ReadDaters();
         try {
             // Get route Area and Route ID
-            String areaName = rdc.getFullArea();
+            String areaName = rdc.area;
 
             JSONObject area = oldData.getJSONObject(areaName);
             JSONObject routes = area.getJSONObject("routes");

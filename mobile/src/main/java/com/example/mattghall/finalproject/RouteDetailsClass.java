@@ -18,9 +18,6 @@ public class RouteDetailsClass {
     public String getFullId() {
         return "route-" + id;
     }
-    public String getFullArea() {
-        return "area-" + area;
-    }
 
     public AnchorClass [] anchors;
 
@@ -89,7 +86,7 @@ public class RouteDetailsClass {
     public JSONObject GetJSON() throws JSONException {
         String img = "n/a";
         String json = "{ \"route-id\": \""+ this.id +"\", \"route-name\": \"" + this.name +
-                "\", \"route-area\": \""+ this.getFullArea() +"\", \"route-gps\": \""+ this.gps +"\", \"route-difficulty\": \""+ this.difficulty +
+                "\", \"route-area\": \""+ this.area +"\", \"route-gps\": \""+ this.gps +"\", \"route-difficulty\": \""+ this.difficulty +
                 "\", \"route-img\": \""+ img +"\", \"anchors\": { ";
 
         String jsonAnchors = "";
