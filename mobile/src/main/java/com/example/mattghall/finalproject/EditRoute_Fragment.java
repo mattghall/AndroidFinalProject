@@ -58,7 +58,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
         // Initialize the form and get all the daters and stuff
         parentActivity = (EditRouteActivity) getActivity();
         datera = parentActivity.GetDataTails();
-        areas = parentActivity.GetClimbingAreas();
+        areas = parentActivity.GetClimbingAreas();        
         View view;
 
         // SEt view and load data if available
@@ -110,22 +110,21 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
           }
       });
 
-
-                // Special Bindings
-        if(parentActivity.isNew) {
-            // SEt title prompt
-            titleEdit.setText(R.string.routeTitlePrompt);
-            areaTextView.setVisibility(View.GONE);
-            deleteButton.setVisibility(View.GONE);
-            // bind properties of spinner to areas
-            areaSpinner.setAdapter(new AreaAdapter(this, areas));
-        }
-        else
-        {
-            // Load anchors
-            anchorListView.setAdapter(new AnchorAdapter(this, RDC.anchors));
-            areaSpinner.setVisibility(View.GONE);
-        }
+        // Special Bindings
+    if(parentActivity.isNew) {
+        // SEt title prompt
+        titleEdit.setText(R.string.routeTitlePrompt);
+        areaTextView.setVisibility(View.GONE);
+        deleteButton.setVisibility(View.GONE);
+        // bind properties of spinner to areas
+        areaSpinner.setAdapter(new AreaAdapter(this, areas));
+    }
+    else
+    {
+        // Load anchors
+        anchorListView.setAdapter(new AnchorAdapter(this, RDC.anchors));
+        areaSpinner.setVisibility(View.GONE);
+    }
 
         return view;
     }
