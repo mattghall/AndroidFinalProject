@@ -1,5 +1,6 @@
 package com.example.mattghall.finalproject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,10 +56,11 @@ public class RouteDetailsClass {
         int l = data.length();
 
         AnchorClass[] anchors = new AnchorClass[l];
+        JSONArray names = data.names();
 
         for(int i = 0; i < l; i++)
         {
-            temp = "anchor-" + String.valueOf(i);
+            temp = names.get(i).toString();
             obj = new AnchorClass(data.getJSONObject(temp));
             anchors[i] = obj;
         }
@@ -84,14 +86,17 @@ public class RouteDetailsClass {
 
     public void RemoveAnchor(int pos)
     {
-        int i = 0;
+        int i = 0, j = 0;
         int l = this.anchors.length;
         AnchorClass[] newAnchors = new AnchorClass[l-1];
 
         while( i < l)
         {
             if(i!=pos) {
-                newAnchors[i] = anchors[i];
+                newAnchors[j] = anchors[i];
+                // Make sure there are no gaps in IDs
+                newAnchors[j].id = String.valueOf(j);
+                j++;
             }
             i++;
         }

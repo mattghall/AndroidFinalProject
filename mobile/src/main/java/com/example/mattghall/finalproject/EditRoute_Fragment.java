@@ -1,6 +1,7 @@
 package com.example.mattghall.finalproject;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -215,8 +216,52 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
         TrySaveData();
     }
 
+    private void AddAnchorDialog()
+    {
+        // Create Object of Dialog class
+        final Dialog anchorDialog = new Dialog(getContext());
+        // Set GUI of login screen
+        anchorDialog.setContentView(R.layout.dialog_anchor);
+
+        // Init button of login GUI
+        Button saveButton = (Button) anchorDialog.findViewById(R.id.btnSave);
+        Button btnCancel = (Button) anchorDialog.findViewById(R.id.btnCancel);
+        final EditText anchorDifficulty = (EditText)anchorDialog.findViewById(R.id.anchorDifficulty);
+        final EditText anchorBeta = (EditText)anchorDialog.findViewById(R.id.anchorBeta);
+
+        // Attached listener for login GUI button
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(anchorDifficulty.getText().toString().trim().length() > 0 && anchorBeta.getText().toString().trim().length() > 0)
+                {
+                    // Add anchor
+                    RDC.AddAnchor(anchorDifficulty.getText().toString(), anchorBeta.getText().toString());
+                    TrySaveData();
+                    anchorDialog.dismiss();
+                }
+                else
+                {
+                    ToastMachine(getResources().getString(R.string.anchorEntryError));
+                }
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                anchorDialog.dismiss();
+            }
+        });
+
+        // Make dialog box visible.
+        anchorDialog.show();
+    }
+
+
     private void AddNewAnchor(String _difficulty, String _beta)
     {
+        AddAnchorDialog();
+        /*
         if(RDC == null)
         {
             ToastMachine("Please save route details before adding anchors");
@@ -225,6 +270,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
             RDC.AddAnchor(_difficulty, _beta);
             TrySaveData();
         }
+        */
     }
 
     private void RemoveAnchor(final int pos)
@@ -386,6 +432,8 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
         in.putExtra("route", putme);
         startActivity(in);
     }
+
+
 
     void ToastMachine(String msg){
         int duration = Toast.LENGTH_SHORT;
