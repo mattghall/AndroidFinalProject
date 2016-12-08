@@ -114,7 +114,12 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.saveButton :
-                UpdateRouteDetails();
+                if(parentActivity.isNew){
+                    SaveNewRoute();
+                }
+                else {
+                    UpdateRouteDetails();
+                }
                 break;
             case R.id.addAnchorButton:
                 AddNewAnchor(anchorDifficultyEdit.getText().toString(),anchorBetaEdit.getText().toString());
@@ -122,6 +127,42 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
             default:
                 ToastMachine("ERRRRRROR");
                 break;
+        }
+    }
+
+    private void SaveNewRoute() {
+        RDC = new RouteDetailsClass();
+        RDC.name = titleEdit.getText().toString();
+        RDC.area = ((ClimbingAreaClass)areaSpinner.getSelectedItem()).id;
+        RDC.gps = gpsEdit.getText().toString();
+        RDC.difficulty = difficultyEdit.getText().toString();
+        AddNewRoute(RDC);
+    }
+
+    private void AddNewRoute(RouteDetailsClass rdc) {
+        JSONObject oldData = ReadDaters();
+        try {
+            // Get route Area and Route ID
+            String areaName = rdc.getFullArea();
+
+            JSONObject area = oldData.getJSONObject(areaName);
+            JSONObject routes = area.getJSONObject("routes");
+            rdc.id = String.valueOf(routes.length());
+
+            JSONObject newRouteDetails = rdc.GetJSON();
+            routes.put(rdc.getFullId(),newRouteDetails);
+            boolean suc = WriteNewDatersFile(oldData.toString());
+
+            if(suc){
+                ToastMachine("New Data Successfully Saved");
+            }
+            else {
+                ToastMachine("Something went wrong");
+            }
+
+        } catch (JSONException e) {
+            ToastMachine("ERROR");
+            e.printStackTrace();
         }
     }
 

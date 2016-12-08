@@ -70,7 +70,6 @@ public class EditRouteActivity extends FragmentActivity {
             {
                 temp = "area-" + String.valueOf(i);
                 obj = datatails.getJSONObject(temp);
-                temp = obj.getString("area-name");
                 list.add(new ClimbingAreaClass(obj));
             }
         } catch (Exception e) {

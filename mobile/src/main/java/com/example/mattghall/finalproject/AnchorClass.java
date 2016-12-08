@@ -13,6 +13,7 @@ public class AnchorClass {
     public String difficulty;
     public String beta;
 
+    public AnchorClass(){};
 
     public AnchorClass(JSONObject _anchor) {
         this.id = "";

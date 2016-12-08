@@ -9,16 +9,19 @@ import org.json.JSONObject;
 
 public class RouteDetailsClass {
     public String id;
-
-    public String getFullId() {
-        return "route-" + id;
-    }
-
     public String name;
     public String area;
     public String gps;
     public String difficulty;
     public String numAnchors;
+
+    public String getFullId() {
+        return "route-" + id;
+    }
+    public String getFullArea() {
+        return "area-" + area;
+    }
+
     public AnchorClass [] anchors;
 
     private String defaultString = "{ \"route-id\": \"\", \"route-name\": \"\", \"route-area\": \"\", \"route-gps\": \"\", \"route-difficulty\": \"\", \"route-img\": \"\", \"anchors\": { } }";
@@ -39,14 +42,14 @@ public class RouteDetailsClass {
         }
     }
 
-    public RouteDetailsClass(String _id, String _name, String _area, String _gps, String _difficulty,String _numAnchors, AnchorClass [] _anchors) {
-        this.id = _id;
-        this.name = _name;
-        this.area = _area;
-        this.gps = _gps;
-        this.difficulty = _difficulty;
-        this.numAnchors = _numAnchors;
-        this.anchors = _anchors;
+    public RouteDetailsClass() {
+        this.id = "";
+        this.name = "";
+        this.area = "";
+        this.gps = "";
+        this.difficulty = "";
+        this.numAnchors = "0";
+        this.anchors = new AnchorClass[0];
     }
 
     private AnchorClass [] GetAnchors(JSONObject data) throws JSONException {
@@ -86,7 +89,7 @@ public class RouteDetailsClass {
     public JSONObject GetJSON() throws JSONException {
         String img = "n/a";
         String json = "{ \"route-id\": \""+ this.id +"\", \"route-name\": \"" + this.name +
-                "\", \"route-area\": \""+ this.area +"\", \"route-gps\": \""+ this.gps +"\", \"route-difficulty\": \""+ this.difficulty +
+                "\", \"route-area\": \""+ this.getFullArea() +"\", \"route-gps\": \""+ this.gps +"\", \"route-difficulty\": \""+ this.difficulty +
                 "\", \"route-img\": \""+ img +"\", \"anchors\": { ";
 
         String jsonAnchors = "";
