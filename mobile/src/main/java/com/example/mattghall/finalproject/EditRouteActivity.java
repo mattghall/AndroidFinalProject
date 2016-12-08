@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.FileInputStream;
@@ -58,8 +57,8 @@ public class EditRouteActivity extends FragmentActivity {
         }
     }
 
-    List<ClimbingAreaClass> GetClimbingAreas() {
-        List<ClimbingAreaClass> list = new ArrayList<>();
+    List<AreaClass> GetClimbingAreas() {
+        List<AreaClass> list = new ArrayList<>();
         String temp = "";
         JSONObject obj = null;
         int l = datatails.length();
@@ -70,7 +69,7 @@ public class EditRouteActivity extends FragmentActivity {
             {
                 temp = "area-" + String.valueOf(i);
                 obj = datatails.getJSONObject(temp);
-                list.add(new ClimbingAreaClass(obj));
+                list.add(new AreaClass(obj));
             }
         } catch (Exception e) {
             ToastMachine("Could not load climbing areas");

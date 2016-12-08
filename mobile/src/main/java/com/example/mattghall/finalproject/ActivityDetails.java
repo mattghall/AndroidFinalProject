@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import java.io.FileInputStream;
 
-public class DetailsActivity extends FragmentActivity {
+public class ActivityDetails extends FragmentActivity {
     JSONObject datatails = null;
     String FILENAME = "data_file";
 

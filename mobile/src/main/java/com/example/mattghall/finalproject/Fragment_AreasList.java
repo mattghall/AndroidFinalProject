@@ -20,14 +20,14 @@ import java.io.FileOutputStream;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class AreasList_Fragment extends Fragment {
+public class Fragment_AreasList extends Fragment {
 
-    public AreasList_Fragment() {
+    public Fragment_AreasList() {
     }
     //String newData = "{ \"area-0\": { \"area-id\": \"0\", \"area-name\": \"Sweet Climbin\", \"trailhead-name\": \"test-trailhead\", \"trailhead-gps\": \"000200020\", \"routes\": { \"route-0\": { \"route-id\": \"0\", \"route-name\": \"Fun Route\", \"route-area\": \"area-0\", \"route-gps\": \"000000\", \"route-difficulty\": \"5-9\", \"route-img\": \"DCS 4320\", \"anchors\": { \"anchor-0\": { \"anchor-num\": \"0\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-1\": { \"anchor-num\": \"1\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-2\": { \"anchor-num\": \"2\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" } } }, \"route-1\": { \"route-id\": \"1\", \"route-name\": \"Sucky Route\", \"route-area\": \"area-0\", \"route-gps\": \"000000\", \"route-difficulty\": \"5-9\", \"route-img\": \"DCS 4320\", \"anchors\": { \"anchor-0\": { \"anchor-num\": \"0\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-1\": { \"anchor-num\": \"1\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-2\": { \"anchor-num\": \"2\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" } } } } }, \"area-1\": { \"area-id\": \"1\", \"area-name\": \"Vertical World\", \"trailhead-name\": \"Commodore Ave\", \"trailhead-gps\": \"000200020\", \"routes\": { \"route-0\": { \"route-id\": \"0\", \"route-name\": \"The Crack\", \"route-area\": \"area-1\", \"route-gps\": \"000000\", \"route-difficulty\": \"5-9\", \"route-img\": \"DCS 4320\", \"anchors\": { \"anchor-0\": { \"anchor-num\": \"0\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-1\": { \"anchor-num\": \"1\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-2\": { \"anchor-num\": \"2\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" } } }, \"route-1\": { \"route-id\": \"1\", \"route-name\": \"Slabin it\", \"route-area\": \"area-1\", \"route-gps\": \"000000\", \"route-difficulty\": \"5-11c\", \"route-img\": \"DCS 4320\", \"anchors\": { \"anchor-0\": { \"anchor-num\": \"0\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-1\": { \"anchor-num\": \"1\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-2\": { \"anchor-num\": \"2\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" } } } } } }";
     String newData = "";
 
-    MainActivity mainActivity;
+    ActivityMain mainActivity;
     private String[] climbingAreaNames = new String[0];
     private String[] climbingAreaIds = new String[0];
     private String[] defaultAreas = {"No Areas Found"};
@@ -40,11 +40,11 @@ public class AreasList_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mainActivity = (MainActivity)getActivity();
+        mainActivity = (ActivityMain)getActivity();
         ctx = getContext();
         //WriteNewDatersFile();
 
-        View fragmentView = inflater.inflate(R.layout.fragment_climbing_areas, container, false);
+        View fragmentView = inflater.inflate(R.layout.fragment_areas, container, false);
 
         climbingAreaListView = (ListView) fragmentView.findViewById(R.id.areas_listview);
 
@@ -158,7 +158,7 @@ public class AreasList_Fragment extends Fragment {
         JSONObject area = mainActivity.data.getJSONObject("area-" + climbingAreaId);
         Bundle buns = new Bundle();
         buns.putString("area", area.toString());
-        RouteList_Fragment routelist_fragment = new RouteList_Fragment();
+        Fragment_RouteList routelist_fragment = new Fragment_RouteList();
         routelist_fragment.setArguments(buns);
         getFragmentManager().beginTransaction().replace(R.id.fragment, routelist_fragment).commit();
     }

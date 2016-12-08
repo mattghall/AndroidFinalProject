@@ -3,7 +3,7 @@
     <data>
         <variable
             name="areaData"
-            type="com.example.mattghall.finalproject.ClimbingAreaClass"/>
+            type="com.example.mattghall.finalproject.AreaClass"/>
     </data>
     <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
@@ -14,7 +14,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:orientation="vertical"
-        tools:context="com.example.mattghall.finalproject.RouteList_Fragment"
+        tools:context="com.example.mattghall.finalproject.Fragment_RouteList"
         tools:showIn="@layout/activity_main">
         <!-- Route Details -->
         <LinearLayout

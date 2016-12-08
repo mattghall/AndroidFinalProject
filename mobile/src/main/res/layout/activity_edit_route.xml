@@ -9,9 +9,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical">
 
-    <fragment android:name="com.example.mattghall.finalproject.EditRoute_Fragment"
+    <fragment android:name="com.example.mattghall.finalproject.Fragment_EditRoute"
         android:id="@+id/detail_frag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout="@layout/fragment_edit_route" />
+        tools:layout="@layout/fragment_edit" />
 </LinearLayout>

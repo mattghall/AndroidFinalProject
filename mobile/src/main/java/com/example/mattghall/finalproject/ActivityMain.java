@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-public class MainActivity extends AppCompatActivity {
+public class ActivityMain extends AppCompatActivity {
     JSONObject data;
 
     String FILENAME = "data_file";
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Add area
-                ClimbingAreaClass newArea = new ClimbingAreaClass(areaNameEdit.getText().toString(),areaTrailheadEdit.getText().toString(),areaTrailheadGPS.getText().toString());
+                AreaClass newArea = new AreaClass(areaNameEdit.getText().toString(),areaTrailheadEdit.getText().toString(),areaTrailheadGPS.getText().toString());
                 SaveArea(newArea);
                 anchorDialog.dismiss();
             }
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void SaveArea(ClimbingAreaClass newRouteDetails)
+    public void SaveArea(AreaClass newRouteDetails)
     {
         JSONObject oldData = ReadDaters();
         try {

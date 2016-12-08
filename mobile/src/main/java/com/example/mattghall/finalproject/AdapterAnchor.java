@@ -2,19 +2,17 @@ package com.example.mattghall.finalproject;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 // https://www.caveofprogramming.com/guest-posts/custom-listview-with-imageview-and-textview-in-android.html
-public class AnchorAdapter extends BaseAdapter{
+public class AdapterAnchor extends BaseAdapter{
     AnchorClass [] result;
     Context context;
     private static LayoutInflater inflater=null;
 
-    public AnchorAdapter(RouteDetails_Fragment mainActivity, AnchorClass [] anchors) {
+    public AdapterAnchor(Fragment_RouteDetails mainActivity, AnchorClass [] anchors) {
         // TODO Auto-generated constructor stub
         result=anchors;
         context=mainActivity.getContext();
@@ -22,7 +20,7 @@ public class AnchorAdapter extends BaseAdapter{
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public AnchorAdapter(EditRoute_Fragment mainActivity, AnchorClass [] anchors) {
+    public AdapterAnchor(Fragment_EditRoute mainActivity, AnchorClass [] anchors) {
         // TODO Auto-generated constructor stub
         result=anchors;
         context=mainActivity.getContext();

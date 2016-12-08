@@ -31,14 +31,14 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EditRoute_Fragment extends Fragment implements View.OnClickListener {
+public class Fragment_EditRoute extends Fragment implements View.OnClickListener {
     JSONObject datera = null;
     JSONObject routeDetails = null;
     String FILENAME = "data_file";
     private ListView anchorListView;
     private ArrayAdapter arrayAdapter;
     EditRouteActivity parentActivity;
-    List<ClimbingAreaClass> areas;
+    List<AreaClass> areas;
 
     RouteDetailsClass RDC;
 
@@ -49,7 +49,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
     Spinner areaSpinner;
     TextView areaTextView;
 
-    public EditRoute_Fragment() {
+    public Fragment_EditRoute() {
         // Required empty public constructor
     }
 
@@ -63,7 +63,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
 
         // SEt view and load data if available
         if(parentActivity.isNew) {
-            view = inflater.inflate(R.layout.fragment_edit_route, container, false);
+            view = inflater.inflate(R.layout.fragment_edit, container, false);
         }
         else {
             routeDetails = GetRoute(datera);
@@ -71,7 +71,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
 
             // Thanks Android Studio Documentation for leaving me to figure this out completely on my own and not thinking to update your documentation at all
             // Set the binding
-            ViewDataBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_route, container, false);
+            ViewDataBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit, container, false);
             view = binding.getRoot();
             binding.setVariable(BR.RDC, RDC);
             binding.setVariable(BR.DataFile, routeDetails.toString());
@@ -117,12 +117,12 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
         areaTextView.setVisibility(View.GONE);
         deleteButton.setVisibility(View.GONE);
         // bind properties of spinner to areas
-        areaSpinner.setAdapter(new AreaAdapter(this, areas));
+        areaSpinner.setAdapter(new AdapterArea(this, areas));
     }
     else
     {
         // Load anchors
-        anchorListView.setAdapter(new AnchorAdapter(this, RDC.anchors));
+        anchorListView.setAdapter(new AdapterAnchor(this, RDC.anchors));
         areaSpinner.setVisibility(View.GONE);
     }
 
@@ -176,7 +176,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
     private void SaveNewRoute() {
         RDC = new RouteDetailsClass();
         RDC.name = titleEdit.getText().toString();
-        RDC.area = "area-" + ((ClimbingAreaClass)areaSpinner.getSelectedItem()).id;
+        RDC.area = "area-" + ((AreaClass)areaSpinner.getSelectedItem()).id;
         RDC.gps = gpsEdit.getText().toString();
         RDC.difficulty = difficultyEdit.getText().toString();
         AddNewRoute(RDC);
@@ -472,7 +472,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
 
     void OpenRoute(JSONObject _route)
     {
-        Intent in = new Intent(parentActivity,DetailsActivity.class);
+        Intent in = new Intent(parentActivity,ActivityDetails.class);
         String putme = _route.toString();
         in.putExtra("route", putme);
         startActivity(in);

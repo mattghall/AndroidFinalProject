@@ -1,66 +1,53 @@
 package com.example.mattghall.finalproject;
 
-import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.annotation.LayoutRes;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.mattghall.finalproject.R;
-
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RouteDetails_Fragment extends Fragment implements View.OnClickListener {
+public class Fragment_RouteDetails extends Fragment implements View.OnClickListener {
     JSONObject routeDetails = null;
     String FILENAME = "data_file";
     private ListView anchorListView;
     private ArrayAdapter arrayAdapter;
     RouteDetailsClass RDC;
     private boolean paused = false;
-    DetailsActivity parentActivity;
+    ActivityDetails parentActivity;
 
-    public RouteDetails_Fragment() {
+    public Fragment_RouteDetails() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Initialize the form and get all the daters and stuff
-        parentActivity = (DetailsActivity) getActivity();
+        parentActivity = (ActivityDetails) getActivity();
         routeDetails = parentActivity.GetDataTails();
         RDC = new RouteDetailsClass(routeDetails);
 
         // Thanks Android Studio Documentation for leaving me to figure this out completely on my own and not thinking to update your documentation at all
         // Set the binding
-        ViewDataBinding binding = DataBindingUtil.inflate(inflater,R.layout.fragment_route__details,container,false);
+        ViewDataBinding binding = DataBindingUtil.inflate(inflater,R.layout.fragment_details,container,false);
         View eternalAnger = binding.getRoot();
         binding.setVariable(BR.RDC,RDC);
         binding.setVariable(BR.DataFile,routeDetails.toString());
 
         // Anchors and stuff
         anchorListView = (ListView) eternalAnger.findViewById(R.id.anchors_listview);
-        anchorListView.setAdapter(new AnchorAdapter(this,RDC.anchors));
+        anchorListView.setAdapter(new AdapterAnchor(this,RDC.anchors));
 
         // Set OnClickListeners
         final Button editButton = (Button) eternalAnger.findViewById(R.id.editButton);

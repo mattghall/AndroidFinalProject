@@ -17,34 +17,32 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Iterator;
-
 /**
  * A placeholder fragment containing a simple view.
  */
-public class RouteList_Fragment extends Fragment {
+public class Fragment_RouteList extends Fragment {
 
-    public RouteList_Fragment() {
+    public Fragment_RouteList() {
     }
 
-    MainActivity mainActivity;
+    ActivityMain mainActivity;
     private String[] routeNames = { "Route A","Route B", "Route C","Route Error" };
     private String[] routeIds = { "0","1","2" };
     private ListView routeListView;
     private ArrayAdapter arrayAdapter;
     JSONObject areaData = null;
-    ClimbingAreaClass climbingAreaClass = null;
+    AreaClass climbingAreaClass = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mainActivity = (MainActivity)getActivity();
+        mainActivity = (ActivityMain)getActivity();
         Bundle buns = this.getArguments();
         try {
             if(buns == null)
                 throw new Exception();
             areaData = new JSONObject(buns.getString("area"));
-            climbingAreaClass = new ClimbingAreaClass(areaData);
+            climbingAreaClass = new AreaClass(areaData);
             routeNames = GetRouteNames(areaData);
             routeIds = GetRouteIds(areaData);
 
@@ -130,7 +128,7 @@ public class RouteList_Fragment extends Fragment {
     }
     void OpenRoute(JSONObject _route)
     {
-        Intent in = new Intent(getActivity(),DetailsActivity.class);
+        Intent in = new Intent(getActivity(),ActivityDetails.class);
         String putme = _route.toString();
         in.putExtra("route", putme);
         startActivity(in);
