@@ -69,7 +69,7 @@ public class Fragment_AreasList extends Fragment {
                     try {
                         OpenArea(climbingAreaIds[position]);
                     } catch (JSONException e) {
-                        ToastMachine("Could not load area");
+                        ToastMachine(getResources().getString(R.string.couldNotLoadAreaMessage));
                         e.printStackTrace();
                     }
                 } else {

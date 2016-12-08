@@ -112,6 +112,7 @@ public class Fragment_EditRoute extends Fragment implements View.OnClickListener
         // Special Bindings
         if(parentActivity.isNew) {
             // SEt title prompt
+            addAnchorButton.setVisibility(View.GONE);
             areaTextView.setVisibility(View.GONE);
             deleteButton.setVisibility(View.GONE);
             // bind properties of spinner to areas

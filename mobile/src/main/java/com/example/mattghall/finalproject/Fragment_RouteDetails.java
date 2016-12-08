@@ -52,8 +52,6 @@ public class Fragment_RouteDetails extends Fragment implements View.OnClickListe
         // Set OnClickListeners
         final Button editButton = (Button) eternalAnger.findViewById(R.id.editButton);
         editButton.setOnClickListener(this);
-        final Button saveButton = (Button) eternalAnger.findViewById(R.id.saveButton);
-        saveButton.setOnClickListener(this);
 
         return eternalAnger;
     }
