@@ -28,4 +28,5 @@
     <string name="cancel">Cancel</string>
     <string name="anchorEntryError">Please enter text into both fields</string>
     <string name="editAnchor">Edit Anchor</string>
+    <string name="newArea">New Area</string>
 </resources>
