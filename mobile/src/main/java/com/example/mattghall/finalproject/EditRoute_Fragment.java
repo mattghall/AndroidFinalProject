@@ -478,8 +478,6 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
         startActivity(in);
     }
 
-
-
     void ToastMachine(String msg){
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(getContext(), msg, duration);

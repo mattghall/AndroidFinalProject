@@ -23,5 +23,22 @@ public class ClimbingAreaClass {
             e.printStackTrace();
         }
     }
+    public ClimbingAreaClass(String _name, String _trailHeadName, String _trailHeadGPS)
+    {
+        this.name = _name;
+        this.trailHeadName = _trailHeadName;
+        this.trailHeadGPS = _trailHeadGPS;
+    }
 
+    // Does not include routes
+    public JSONObject GetJSON()
+    {
+        // sample = { "area-id": "1", "area-name": "Vertical World", "trailhead-name": "Commodore Ave", "trailhead-gps": "000200020", "routes": {} }
+        String json = "{ \"area-id\": \"" + this.id + "\", \"area-name\": \"" + this.name + "\", \"trailhead-name\": \"" + this.trailHeadName + "\", \"trailhead-gps\": \"" + this.trailHeadGPS + "\", \"routes\": {} }";
+        try {
+            return new JSONObject(json);
+        } catch (JSONException e) {
+            return new JSONObject();
+        }
+    }
 }
