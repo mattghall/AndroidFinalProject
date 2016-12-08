@@ -37,12 +37,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:visibility="gone"
                 android:id="@+id/gpsLabel"
                 style="@style/DetailsLabels"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/gpsLabel" />
             <TextView
+                android:visibility="gone"
                 android:id="@+id/routeGPS"
                 style="@style/DetailsValue"
                 android:layout_width="match_parent"
