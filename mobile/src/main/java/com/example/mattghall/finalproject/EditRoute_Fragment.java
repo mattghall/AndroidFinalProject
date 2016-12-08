@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +33,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
     private ListView anchorListView;
     private ArrayAdapter arrayAdapter;
     EditRouteActivity parentActivity;
+    List<ClimbingAreaClass> areas;
 
     RouteDetailsClass RDC;
 
@@ -39,7 +42,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
     EditText difficultyEdit;
     EditText anchorDifficultyEdit;
     EditText anchorBetaEdit;
-    EditText areaEdit;
+    Spinner areaSpinner;
     TextView areaTextView;
 
     public EditRoute_Fragment() {
@@ -51,12 +54,12 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
         // Initialize the form and get all the daters and stuff
         parentActivity = (EditRouteActivity) getActivity();
         datera = parentActivity.GetDataTails();
-
-        View eternalAnger;
+        areas = parentActivity.GetClimbingAreas();
+        View view;
 
         // SEt view and load data if available
         if(parentActivity.isNew) {
-            eternalAnger = inflater.inflate(R.layout.fragment_edit_route, container, false);
+            view = inflater.inflate(R.layout.fragment_edit_route, container, false);
         }
         else {
             routeDetails = GetRoute(datera);
@@ -65,28 +68,28 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
             // Thanks Android Studio Documentation for leaving me to figure this out completely on my own and not thinking to update your documentation at all
             // Set the binding
             ViewDataBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_route, container, false);
-            eternalAnger = binding.getRoot();
+            view = binding.getRoot();
             binding.setVariable(BR.RDC, RDC);
             binding.setVariable(BR.DataFile, routeDetails.toString());
         }
 
         // Set OnClickListeners
-        final Button saveButton = (Button) eternalAnger.findViewById(R.id.saveButton);
+        final Button saveButton = (Button) view.findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
-        final Button addAnchorButton = (Button) eternalAnger.findViewById(R.id.addAnchorButton);
+        final Button addAnchorButton = (Button) view.findViewById(R.id.addAnchorButton);
         addAnchorButton.setOnClickListener(this);
 
         // Reference lovely EditTexts
-        titleEdit = (EditText)eternalAnger.findViewById(R.id.routeTitle);
-        gpsEdit = (EditText)eternalAnger.findViewById(R.id.routeGPS);
-        difficultyEdit = (EditText)eternalAnger.findViewById(R.id.routeDifficulty);
-        anchorDifficultyEdit = (EditText)eternalAnger.findViewById(R.id.newAnchorDifficulty);
-        anchorBetaEdit = (EditText)eternalAnger.findViewById(R.id.newAnchorBeta);
-        areaEdit = (EditText)eternalAnger.findViewById(R.id.routeAreaEditText);
-        areaTextView = (TextView)eternalAnger.findViewById(R.id.routeAreaTextView);
+        titleEdit = (EditText)view.findViewById(R.id.routeTitle);
+        gpsEdit = (EditText)view.findViewById(R.id.routeGPS);
+        difficultyEdit = (EditText)view.findViewById(R.id.routeDifficulty);
+        anchorDifficultyEdit = (EditText)view.findViewById(R.id.newAnchorDifficulty);
+        anchorBetaEdit = (EditText)view.findViewById(R.id.newAnchorBeta);
+        areaSpinner = (Spinner)view.findViewById(R.id.routeAreaSpinner);
+        areaTextView = (TextView)view.findViewById(R.id.routeAreaTextView);
 
         // Anchors and stuff
-        anchorListView = (ListView) eternalAnger.findViewById(R.id.anchors_listview);
+        anchorListView = (ListView) view.findViewById(R.id.anchors_listview);
 
 
         // Special Bindings
@@ -94,15 +97,17 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
             // SEt title prompt
             titleEdit.setText(R.string.routeTitlePrompt);
             areaTextView.setVisibility(View.GONE);
+            // bind properties of spinner to areas
+            areaSpinner.setAdapter(new AreaAdapter(this, areas));
         }
         else
         {
             // Load anchors
             anchorListView.setAdapter(new AnchorAdapter(this, RDC.anchors));
-            areaEdit.setVisibility(View.GONE);
+            areaSpinner.setVisibility(View.GONE);
         }
 
-        return eternalAnger;
+        return view;
     }
 
     @Override

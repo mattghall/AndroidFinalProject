@@ -33,13 +33,12 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:text="@{RDC.area}" />
-            <EditText
-                android:id="@+id/routeAreaEditText"
-                style="@style/DetailsValue"
+            <Spinner
+                android:id="@+id/routeAreaSpinner"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:text="@string/climbing_areas_title" />
+                android:gravity="center_vertical|start" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

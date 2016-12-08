@@ -21,6 +21,8 @@ public class RouteDetailsClass {
     public String numAnchors;
     public AnchorClass [] anchors;
 
+    private String defaultString = "{ \"route-id\": \"\", \"route-name\": \"\", \"route-area\": \"\", \"route-gps\": \"\", \"route-difficulty\": \"\", \"route-img\": \"\", \"anchors\": { } }";
+
     // Constructor made from passing in JSONObject of the route
     public RouteDetailsClass(JSONObject data) {
         try {
@@ -99,5 +101,15 @@ public class RouteDetailsClass {
 
         json += jsonAnchors;
         return new JSONObject(json);
+    }
+
+    @Override
+    public String toString()
+    {
+        try {
+            return this.GetJSON().toString();
+        } catch (JSONException e) {
+            return defaultString;
+        }
     }
 }

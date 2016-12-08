@@ -9,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EditRouteActivity extends FragmentActivity {
     String FILENAME = "data_file";
@@ -55,6 +57,27 @@ public class EditRouteActivity extends FragmentActivity {
             return new JSONObject();
         }
     }
+
+    List<ClimbingAreaClass> GetClimbingAreas() {
+        List<ClimbingAreaClass> list = new ArrayList<>();
+        String temp = "";
+        JSONObject obj = null;
+        int l = datatails.length();
+        String[] areaNames = new String[l];
+
+        try{
+            for(int i = 0; i < l; i++)
+            {
+                temp = "area-" + String.valueOf(i);
+                obj = datatails.getJSONObject(temp);
+                temp = obj.getString("area-name");
+                list.add(new ClimbingAreaClass(obj));
+            }
+        } catch (Exception e) {
+            ToastMachine("Could not load climbing areas");
+        }
+        return list;
+        }
 
     void ToastMachine(String msg){
         int duration = Toast.LENGTH_SHORT;
