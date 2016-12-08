@@ -2,6 +2,7 @@ package com.example.mattghall.finalproject;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -154,7 +155,9 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
             boolean suc = WriteNewDatersFile(oldData.toString());
 
             if(suc){
-                ToastMachine("New Data Successfully Saved");
+                ToastMachine("New Route Successfully Saved");
+                parentActivity.finish();
+                OpenRoute(RDC.GetJSON());
             }
             else {
                 ToastMachine("Something went wrong");
@@ -280,6 +283,14 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
             e.printStackTrace();
             return new JSONObject();
         }
+    }
+
+    void OpenRoute(JSONObject _route)
+    {
+        Intent in = new Intent(parentActivity,DetailsActivity.class);
+        String putme = _route.toString();
+        in.putExtra("route", putme);
+        startActivity(in);
     }
 
     void ToastMachine(String msg){

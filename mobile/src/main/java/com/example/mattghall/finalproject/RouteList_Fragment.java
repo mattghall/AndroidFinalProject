@@ -67,7 +67,7 @@ public class RouteList_Fragment extends Fragment {
                    try {
                        JSONObject route = areaData.getJSONObject("routes").getJSONObject(temp);
                        route = mainActivity.data.getJSONObject(route.getString("route-area")).getJSONObject("routes").getJSONObject(temp);
-                       OpenRoute(route.getString("route-id"),route);
+                       OpenRoute(route);
                    } catch (JSONException e) {
                        e.printStackTrace();
                    }
@@ -124,10 +124,10 @@ public class RouteList_Fragment extends Fragment {
 
         return routeIds;
     }
-    void OpenRoute(String climbingAreaId, JSONObject area)
+    void OpenRoute(JSONObject _route)
     {
         Intent in = new Intent(getActivity(),DetailsActivity.class);
-        String putme = area.toString();
+        String putme = _route.toString();
         in.putExtra("route", putme);
         startActivity(in);
     }
