@@ -45,7 +45,6 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
     EditText titleEdit;
     EditText gpsEdit;
     EditText difficultyEdit;
-    EditText anchorDifficultyEdit;
     EditText anchorBetaEdit;
     Spinner areaSpinner;
     TextView areaTextView;
@@ -90,8 +89,6 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
         titleEdit = (EditText)view.findViewById(R.id.routeTitle);
         gpsEdit = (EditText)view.findViewById(R.id.routeGPS);
         difficultyEdit = (EditText)view.findViewById(R.id.routeDifficulty);
-        anchorDifficultyEdit = (EditText)view.findViewById(R.id.newAnchorDifficulty);
-        anchorBetaEdit = (EditText)view.findViewById(R.id.newAnchorBeta);
         areaSpinner = (Spinner)view.findViewById(R.id.routeAreaSpinner);
         areaTextView = (TextView)view.findViewById(R.id.routeAreaTextView);
 
@@ -101,13 +98,20 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
         anchorListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                RemoveAnchor(position);
-                return false;
+            RemoveAnchor(position);
+            return true;
             }
         });
 
+        anchorListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+          @Override
+          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+              ReplaceAnchor(position);
+          }
+      });
 
-        // Special Bindings
+
+                // Special Bindings
         if(parentActivity.isNew) {
             // SEt title prompt
             titleEdit.setText(R.string.routeTitlePrompt);
@@ -141,7 +145,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
                 TryDeleteRoute();
                 break;
             case R.id.addAnchorButton:
-                AddNewAnchor(anchorDifficultyEdit.getText().toString(),anchorBetaEdit.getText().toString());
+                AddNewAnchor();
                 break;
             default:
                 ToastMachine("ERRRRRROR");
@@ -258,19 +262,61 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
     }
 
 
-    private void AddNewAnchor(String _difficulty, String _beta)
+    private void AddNewAnchor()
     {
         AddAnchorDialog();
-        /*
-        if(RDC == null)
-        {
-            ToastMachine("Please save route details before adding anchors");
-        }
-        else {
-            RDC.AddAnchor(_difficulty, _beta);
-            TrySaveData();
-        }
-        */
+    }
+
+    private void ReplaceAnchor(int _pos)
+    {
+        String _difficulty = RDC.anchors[_pos].difficulty;
+        String _beta = RDC.anchors[_pos].beta;
+
+        ReplaceAnchorDialog(_pos, _difficulty,_beta);
+    }
+
+    private void ReplaceAnchorDialog(final int pos, final String _difficulty,final String _beta)
+    {
+        // Create Object of Dialog class
+        final Dialog anchorDialog = new Dialog(getContext());
+        // Set GUI of login screen
+        anchorDialog.setContentView(R.layout.dialog_anchor);
+
+        // Init button of login GUI
+        Button saveButton = (Button) anchorDialog.findViewById(R.id.btnSave);
+        Button btnCancel = (Button) anchorDialog.findViewById(R.id.btnCancel);
+        final EditText anchorDifficulty = (EditText)anchorDialog.findViewById(R.id.anchorDifficulty);
+        final EditText anchorBeta = (EditText)anchorDialog.findViewById(R.id.anchorBeta);
+
+        anchorDifficulty.setText(_difficulty);
+        anchorBeta.setText(_beta);
+
+        // Attached listener for login GUI button
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(anchorDifficulty.getText().toString().trim().length() > 0 && anchorBeta.getText().toString().trim().length() > 0)
+                {
+                    // Add anchor
+                    RDC.ReplaceAnchor(pos, anchorDifficulty.getText().toString(), anchorBeta.getText().toString());
+                    TrySaveData();
+                    anchorDialog.dismiss();
+                }
+                else
+                {
+                    ToastMachine(getResources().getString(R.string.anchorEntryError));
+                }
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                anchorDialog.dismiss();
+            }
+        });
+
+        // Make dialog box visible.
+        anchorDialog.show();
     }
 
     private void RemoveAnchor(final int pos)

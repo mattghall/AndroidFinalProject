@@ -84,31 +84,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/anchorLabel" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/newAnchorDifficulty"
-                style="@style/DetailsLabels"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/difficultyLabel" />
-            <EditText
-                android:id="@+id/newAnchorBeta"
-                style="@style/DetailsLabels"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/betaLabel" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
             <Button
                 android:id="@+id/addAnchorButton"
-                android:layout_width="83dp"
-                android:minWidth="150dp"
-                android:layout_height="match_parent"
-                android:text="@string/addAnchorButton"
-                android:layout_weight="0.33" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/addAnchorButton" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

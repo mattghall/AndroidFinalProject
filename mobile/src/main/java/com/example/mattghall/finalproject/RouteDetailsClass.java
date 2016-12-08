@@ -84,6 +84,26 @@ public class RouteDetailsClass {
         numAnchors = String.valueOf(l+1);
     }
 
+    public void ReplaceAnchor(int pos, String anchorDifficulty, String anchorBeta)
+    {
+        int i = 0;
+        int l = this.anchors.length;
+        AnchorClass[] newAnchors = new AnchorClass[l];
+
+        while( i < l)
+        {
+            if(i!=pos) {
+                newAnchors[i] = anchors[i];
+            }
+            else{
+                newAnchors[i] = new AnchorClass(String.valueOf(i),anchorDifficulty,anchorBeta);
+            }
+            i++;
+        }
+
+        anchors = newAnchors;
+    }
+
     public void RemoveAnchor(int pos)
     {
         int i = 0, j = 0;
