@@ -11,7 +11,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditRouteActivity extends FragmentActivity {
+public class ActivityEdit extends FragmentActivity {
     String FILENAME = "data_file";
     private JSONObject datatails = null;
     public String areaId;
@@ -51,7 +51,7 @@ public class EditRouteActivity extends FragmentActivity {
         }
         catch (Exception e)
         {
-            ToastMachine("Could Not Load Saved Data. Go Ahead! Add some!");
+            ToastMachine(getResources().getString(R.string.noSavedDataMessage));
             e.printStackTrace();
             return new JSONObject();
         }

@@ -27,7 +27,7 @@
             android:configChanges="orientation|keyboardHidden">
 
         </activity>
-        <activity android:name=".EditRouteActivity"
+        <activity android:name=".ActivityEdit"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 

@@ -65,7 +65,7 @@ public class Fragment_RouteDetails extends Fragment implements View.OnClickListe
                 EditRoute();
                 break;
             default:
-                ToastMachine("ERRRRRROR");
+                ToastMachine(getResources().getString(R.string.genericErrorMessage));
                 break;
         }
     }
@@ -105,7 +105,7 @@ public class Fragment_RouteDetails extends Fragment implements View.OnClickListe
     void EditRoute()
     {
         paused = true;
-        Intent in = new Intent(getActivity(),EditRouteActivity.class);
+        Intent in = new Intent(getActivity(),ActivityEdit.class);
         in.putExtra("isNew", false);
         in.putExtra("area-id",RDC.area);
         in.putExtra("route-id",RDC.id);

@@ -47,7 +47,7 @@ public class Fragment_RouteList extends Fragment {
             routeIds = GetRouteIds(areaData);
 
         } catch (Exception e) {
-            ToastMachine("Could not get routes");
+            ToastMachine(getResources().getString(R.string.couldNotLoadRoutesMessage));
             e.printStackTrace();
         }
 
@@ -75,7 +75,7 @@ public class Fragment_RouteList extends Fragment {
                }
                 else
                {
-                   ToastMachine("Could not load Route");
+                   ToastMachine(getResources().getString(R.string.couldNotLoadRoutesMessage));
                }
             }
         });

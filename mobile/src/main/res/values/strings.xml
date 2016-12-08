@@ -5,7 +5,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="climbing_areas_title">Climbing Areas</string>
     <string name="routes_title">Routes:</string>
-    <string name="title_activity_details">DetailsActivity</string>
 
     <!-- Details Page Labels -->
     <string name="areaLabel">Climbing Area</string>
@@ -29,4 +28,19 @@
     <string name="anchorEntryError">Please enter text into both fields</string>
     <string name="editAnchor">Edit Anchor</string>
     <string name="newArea">New Area</string>
+    <string name="difficultyHint">5-??</string>
+    <string name="deleteConfirmationMessage">Do you really want to delete this route?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="newRouteSuccessMessage">New Route Successfully Saved</string>
+    <string name="genericErrorMessage">Something went wrong</string>
+    <string name="pleaseSaveRouteFirstMessage">Please save route details before adding anchors</string>
+    <string name="deleteAnchorConfirmation">Do you really want to delete this anchor?</string>
+    <string name="couldNotSaveRouteMessage">Could not save route</string>
+    <string name="saveSuccess">New Data Successfully Saved</string>
+    <string name="routeDeletedMessage">Route Deleted</string>
+    <string name="deletingRouteMessage">Deleting Route</string>
+    <string name="couldNotLoadRoutesMessage">Could not load routes</string>
+    <string name="noSavedDataMessage">Could Not Load Saved Data. Go Ahead! Add some!</string>
+    <string name="noLoadSavedDataMessage">Could not load saved data</string>
 </resources>

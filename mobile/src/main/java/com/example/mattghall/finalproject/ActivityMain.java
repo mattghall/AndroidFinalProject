@@ -102,7 +102,7 @@ public class ActivityMain extends AppCompatActivity {
 
     void CreateNewRoute()
     {
-        Intent in = new Intent(this,EditRouteActivity.class);
+        Intent in = new Intent(this,ActivityEdit.class);
         in.putExtra("isNew", true);
         startActivity(in);
     }
@@ -154,14 +154,14 @@ public class ActivityMain extends AppCompatActivity {
             boolean suc = WriteNewDatersFile(oldData.toString());
             if(suc){
                 RestartActivity();
-                ToastMachine("New Data Successfully Saved");
+                ToastMachine(getResources().getString(R.string.saveSuccess));
             }
             else {
-                ToastMachine("Something went wrong");
+                ToastMachine(getResources().getString(R.string.genericErrorMessage));
             }
 
         } catch (JSONException e) {
-            ToastMachine("ERROR");
+            ToastMachine(getResources().getString(R.string.genericErrorMessage));
             e.printStackTrace();
         }
     }
@@ -186,7 +186,7 @@ public class ActivityMain extends AppCompatActivity {
         }
         catch (Exception e)
         {
-            ToastMachine("ERRRRRRROR Could not load saved data file");
+            ToastMachine(getResources().getString(R.string.noLoadSavedDataMessage));
             e.printStackTrace();
             return new JSONObject();
         }

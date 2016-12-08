@@ -73,7 +73,7 @@ public class Fragment_AreasList extends Fragment {
                         e.printStackTrace();
                     }
                 } else {
-                    ToastMachine("Could not load area");
+                    ToastMachine(getResources().getString(R.string.genericErrorMessage));
                 }
             }
         });
@@ -100,7 +100,7 @@ public class Fragment_AreasList extends Fragment {
         }
         catch (Exception e)
         {
-            ToastMachine("Could Not Load Saved Data. Go Ahead! Add some!");
+            ToastMachine(getResources().getString(R.string.noLoadSavedDataMessage));
             e.printStackTrace();
             return new JSONObject();
         }

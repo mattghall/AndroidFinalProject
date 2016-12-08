@@ -37,7 +37,7 @@ public class Fragment_EditRoute extends Fragment implements View.OnClickListener
     String FILENAME = "data_file";
     private ListView anchorListView;
     private ArrayAdapter arrayAdapter;
-    EditRouteActivity parentActivity;
+    ActivityEdit parentActivity;
     List<AreaClass> areas;
 
     RouteDetailsClass RDC;
@@ -45,7 +45,6 @@ public class Fragment_EditRoute extends Fragment implements View.OnClickListener
     EditText titleEdit;
     EditText gpsEdit;
     EditText difficultyEdit;
-    EditText anchorBetaEdit;
     Spinner areaSpinner;
     TextView areaTextView;
 
@@ -56,9 +55,9 @@ public class Fragment_EditRoute extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Initialize the form and get all the daters and stuff
-        parentActivity = (EditRouteActivity) getActivity();
+        parentActivity = (ActivityEdit) getActivity();
         datera = parentActivity.GetDataTails();
-        areas = parentActivity.GetClimbingAreas();        
+        areas = parentActivity.GetClimbingAreas();
         View view;
 
         // SEt view and load data if available
@@ -98,33 +97,32 @@ public class Fragment_EditRoute extends Fragment implements View.OnClickListener
         anchorListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-            RemoveAnchor(position);
-            return true;
+                RemoveAnchor(position);
+                return true;
             }
         });
 
         anchorListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-          @Override
-          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-              ReplaceAnchor(position);
-          }
-      });
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ReplaceAnchor(position);
+            }
+        });
 
         // Special Bindings
-    if(parentActivity.isNew) {
-        // SEt title prompt
-        titleEdit.setText(R.string.routeTitlePrompt);
-        areaTextView.setVisibility(View.GONE);
-        deleteButton.setVisibility(View.GONE);
-        // bind properties of spinner to areas
-        areaSpinner.setAdapter(new AdapterArea(this, areas));
-    }
-    else
-    {
-        // Load anchors
-        anchorListView.setAdapter(new AdapterAnchor(this, RDC.anchors));
-        areaSpinner.setVisibility(View.GONE);
-    }
+        if(parentActivity.isNew) {
+            // SEt title prompt
+            areaTextView.setVisibility(View.GONE);
+            deleteButton.setVisibility(View.GONE);
+            // bind properties of spinner to areas
+            areaSpinner.setAdapter(new AdapterArea(this, areas));
+        }
+        else
+        {
+            // Load anchors
+            anchorListView.setAdapter(new AdapterAnchor(this, RDC.anchors));
+            areaSpinner.setVisibility(View.GONE);
+        }
 
         return view;
     }
@@ -147,7 +145,7 @@ public class Fragment_EditRoute extends Fragment implements View.OnClickListener
                 AddNewAnchor();
                 break;
             default:
-                ToastMachine("ERRRRRROR");
+                ToastMachine(getResources().getString(R.string.genericErrorMessage));
                 break;
         }
     }
@@ -169,8 +167,8 @@ public class Fragment_EditRoute extends Fragment implements View.OnClickListener
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage("Do you really want to delete this route?").setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
+        builder.setMessage(getResources().getString(R.string.deleteConfirmationMessage)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener)
+                .setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
     }
 
     private void SaveNewRoute() {
@@ -197,16 +195,16 @@ public class Fragment_EditRoute extends Fragment implements View.OnClickListener
             boolean suc = WriteNewDatersFile(oldData.toString());
 
             if(suc){
-                ToastMachine("New Route Successfully Saved");
+                ToastMachine(getResources().getString(R.string.newRouteSuccessMessage));
                 parentActivity.finish();
                 OpenRoute(RDC.GetJSON());
             }
             else {
-                ToastMachine("Something went wrong");
+                ToastMachine(getResources().getString(R.string.genericErrorMessage));
             }
 
         } catch (JSONException e) {
-            ToastMachine("ERROR");
+            ToastMachine(getResources().getString(R.string.genericErrorMessage));
             e.printStackTrace();
         }
     }
@@ -322,7 +320,7 @@ public class Fragment_EditRoute extends Fragment implements View.OnClickListener
     {
         if(RDC == null)
         {
-            ToastMachine("Please save route details before adding anchors");
+            ToastMachine(getResources().getString(R.string.pleaseSaveRouteFirstMessage));
         }
         else {
             DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -342,8 +340,8 @@ public class Fragment_EditRoute extends Fragment implements View.OnClickListener
             };
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setMessage("Do you really want to delete this anchor?").setPositiveButton("Yes", dialogClickListener)
-                    .setNegativeButton("No", dialogClickListener).show();
+            builder.setMessage(getResources().getString(R.string.deleteAnchorConfirmation)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener)
+                    .setNegativeButton(getResources().getString(R.string.yes), dialogClickListener).show();
         }
     }
 
@@ -354,7 +352,7 @@ public class Fragment_EditRoute extends Fragment implements View.OnClickListener
             SaveRoute(newRoute);
             RestartActivity();
         } catch (JSONException e) {
-            ToastMachine("Could not Save Route");
+            ToastMachine(getResources().getString(R.string.couldNotSaveRouteMessage));
             e.printStackTrace();
         }
     }
@@ -379,21 +377,21 @@ public class Fragment_EditRoute extends Fragment implements View.OnClickListener
             routes.put(routeId,newRouteDetails);
             boolean suc = WriteNewDatersFile(oldData.toString());
             if(suc){
-                ToastMachine("New Data Successfully Saved");
+                ToastMachine(getResources().getString(R.string.saveSuccess));
             }
             else {
-                ToastMachine("Something went wrong");
+                ToastMachine(getResources().getString(R.string.genericErrorMessage));
             }
 
         } catch (JSONException e) {
-            ToastMachine("ERROR");
+            ToastMachine(getResources().getString(R.string.genericErrorMessage));
             e.printStackTrace();
         }
     }
 
     public void DeleteRoute()
     {
-        ToastMachine("Deleting Route");
+        ToastMachine(getResources().getString(R.string.deletingRouteMessage));
         JSONObject oldData = ReadDaters();
         try {
             // Get route Area and Route ID
@@ -405,14 +403,14 @@ public class Fragment_EditRoute extends Fragment implements View.OnClickListener
             routes.remove(routeId);
             boolean suc = WriteNewDatersFile(oldData.toString());
             if(suc){
-                ToastMachine("Route Deleted");
+                ToastMachine(getResources().getString(R.string.routeDeletedMessage));
                 parentActivity.finish();
             }
             else {
-                ToastMachine("Something went wrong");
+                ToastMachine(getResources().getString(R.string.genericErrorMessage));
             }
         } catch (JSONException e) {
-            ToastMachine("ERROR");
+            ToastMachine(getResources().getString(R.string.genericErrorMessage));
             e.printStackTrace();
         }
     }
@@ -437,7 +435,7 @@ public class Fragment_EditRoute extends Fragment implements View.OnClickListener
         }
         catch (Exception e)
         {
-            ToastMachine("ERRRRRRROR Could not load saved data file");
+            ToastMachine(getResources().getString(R.string.genericErrorMessage));
             e.printStackTrace();
             return new JSONObject();
         }
