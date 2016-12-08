@@ -72,13 +72,6 @@ public class AnchorAdapter extends BaseAdapter{
         holder.difficultyTextView.setText(result[position].difficulty);
         holder.betaTextView.setText(result[position].beta);
 
-        rowView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Toast.makeText(context, "You Clicked Anchor "+result[position].id, Toast.LENGTH_LONG).show();
-            }
-        });
         return rowView;
     }
 

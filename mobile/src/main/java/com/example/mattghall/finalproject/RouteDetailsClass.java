@@ -82,6 +82,24 @@ public class RouteDetailsClass {
         numAnchors = String.valueOf(l+1);
     }
 
+    public void RemoveAnchor(int pos)
+    {
+        int i = 0;
+        int l = this.anchors.length;
+        AnchorClass[] newAnchors = new AnchorClass[l-1];
+
+        while( i < l)
+        {
+            if(i!=pos) {
+                newAnchors[i] = anchors[i];
+            }
+            i++;
+        }
+
+        anchors = newAnchors;
+        numAnchors = String.valueOf(l-1);
+    }
+
     //"routes\": { \"route-0\": { \"route-id\": \"0\", \"route-name\": \"Fun Route\", \"route-area\": \"area-0\", \"route-gps\": \"000000\", \"route-difficulty\": \"5-9\", \"route-img\": \"DCS 4320\", \"anchors\": { \"anchor-0\": { \"anchor-num\": \"0\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-1\": { \"anchor-num\": \"1\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" }, \"anchor-2\": { \"anchor-num\": \"2\", \"anchor-difficulty\": \"5-8\", \"anchor-beta\": \"this is easy clip\" } } }
     public JSONObject GetJSON() throws JSONException {
         String img = "n/a";

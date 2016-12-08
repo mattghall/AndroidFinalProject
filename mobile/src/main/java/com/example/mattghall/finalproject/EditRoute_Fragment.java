@@ -1,7 +1,9 @@
 package com.example.mattghall.finalproject;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -9,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -94,6 +97,14 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
         // Anchors and stuff
         anchorListView = (ListView) view.findViewById(R.id.anchors_listview);
 
+        anchorListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                RemoveAnchor(position);
+                return false;
+            }
+        });
+
 
         // Special Bindings
         if(parentActivity.isNew) {
@@ -126,8 +137,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
                 }
                 break;
             case R.id.deleteButton :
-                DeleteRoute();
-                ToastMachine("Deleting Route");
+                TryDeleteRoute();
                 break;
             case R.id.addAnchorButton:
                 AddNewAnchor(anchorDifficultyEdit.getText().toString(),anchorBetaEdit.getText().toString());
@@ -136,6 +146,27 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
                 ToastMachine("ERRRRRROR");
                 break;
         }
+    }
+
+    private void TryDeleteRoute() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        DeleteRoute();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage("Do you really want to delete this route?").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
     }
 
     private void SaveNewRoute() {
@@ -196,6 +227,36 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
         }
     }
 
+    private void RemoveAnchor(final int pos)
+    {
+        if(RDC == null)
+        {
+            ToastMachine("Please save route details before adding anchors");
+        }
+        else {
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            RDC.RemoveAnchor(pos);
+                            TrySaveData();
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            //No button clicked
+                            break;
+                    }
+                }
+            };
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setMessage("Do you really want to delete this anchor?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
+        }
+    }
+
+
     public void TrySaveData(){
         try {
             JSONObject newRoute = RDC.GetJSON();
@@ -241,6 +302,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
 
     public void DeleteRoute()
     {
+        ToastMachine("Deleting Route");
         JSONObject oldData = ReadDaters();
         try {
             // Get route Area and Route ID
