@@ -77,6 +77,8 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
         // Set OnClickListeners
         final Button saveButton = (Button) view.findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
+        final Button deleteButton = (Button) view.findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(this);
         final Button addAnchorButton = (Button) view.findViewById(R.id.addAnchorButton);
         addAnchorButton.setOnClickListener(this);
 
@@ -98,6 +100,7 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
             // SEt title prompt
             titleEdit.setText(R.string.routeTitlePrompt);
             areaTextView.setVisibility(View.GONE);
+            deleteButton.setVisibility(View.GONE);
             // bind properties of spinner to areas
             areaSpinner.setAdapter(new AreaAdapter(this, areas));
         }
@@ -121,6 +124,10 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
                 else {
                     UpdateRouteDetails();
                 }
+                break;
+            case R.id.deleteButton :
+                DeleteRoute();
+                ToastMachine("Deleting Route");
                 break;
             case R.id.addAnchorButton:
                 AddNewAnchor(anchorDifficultyEdit.getText().toString(),anchorBetaEdit.getText().toString());
@@ -226,6 +233,31 @@ public class EditRoute_Fragment extends Fragment implements View.OnClickListener
                 ToastMachine("Something went wrong");
             }
 
+        } catch (JSONException e) {
+            ToastMachine("ERROR");
+            e.printStackTrace();
+        }
+    }
+
+    public void DeleteRoute()
+    {
+        JSONObject oldData = ReadDaters();
+        try {
+            // Get route Area and Route ID
+            String areaName = routeDetails.getString("route-area");
+            String routeId = "route-" + routeDetails.getString("route-id");
+
+            JSONObject area = oldData.getJSONObject(areaName);
+            JSONObject routes = area.getJSONObject("routes");
+            routes.remove(routeId);
+            boolean suc = WriteNewDatersFile(oldData.toString());
+            if(suc){
+                ToastMachine("Route Deleted");
+                parentActivity.finish();
+            }
+            else {
+                ToastMachine("Something went wrong");
+            }
         } catch (JSONException e) {
             ToastMachine("ERROR");
             e.printStackTrace();

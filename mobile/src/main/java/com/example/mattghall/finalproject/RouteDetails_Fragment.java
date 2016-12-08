@@ -101,11 +101,17 @@ public class RouteDetails_Fragment extends Fragment implements View.OnClickListe
 
     public void RestartActivity() {
         // Restart Activity
-        getActivity().finish();
-        Intent starter = getActivity().getIntent();
-        starter.removeExtra("route");
-        starter.putExtra("route", RDC.toString());
-        startActivity(starter);
+        try {
+            getActivity().finish();
+            Intent starter = getActivity().getIntent();
+            starter.removeExtra("route");
+            starter.putExtra("route", RDC.toString());
+            startActivity(starter);
+        }
+        catch (Exception e)
+        {
+            parentActivity.finish();
+        }
     }
 
 

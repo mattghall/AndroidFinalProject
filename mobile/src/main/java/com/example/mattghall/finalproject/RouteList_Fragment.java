@@ -13,8 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Iterator;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -94,16 +97,17 @@ public class RouteList_Fragment extends Fragment {
         JSONObject obj = null;
         int l = data.getJSONObject("routes").length();
 
-        String[] routeNames = new String[l];
+        String[] _routeNames = new String[l];
+        JSONArray names = data.getJSONObject("routes").names();
 
         for(int i = 0; i < l; i++)
         {
-            temp = "route-" + String.valueOf(i);
+            temp = names.get(i).toString();
             obj = data.getJSONObject("routes").getJSONObject(temp);
             temp = obj.getString("route-name");
-            routeNames[i] = temp;
+            _routeNames[i] = temp;
         }
-        return routeNames;
+        return _routeNames;
     }
 
 
@@ -112,17 +116,17 @@ public class RouteList_Fragment extends Fragment {
         JSONObject obj = null;
         int l = data.getJSONObject("routes").length();
 
-        String[] routeIds = new String[l];
+        String[] _routeIds = new String[l];
+        JSONArray names = data.getJSONObject("routes").names();
 
         for(int i = 0; i < l; i++)
         {
-            temp = "route-" + String.valueOf(i);
+            temp = names.get(i).toString();
             obj = data.getJSONObject("routes").getJSONObject(temp);
             temp = obj.getString("route-id");
-            routeIds[i] = temp;
+            _routeIds[i] = temp;
         }
-
-        return routeIds;
+        return _routeIds;
     }
     void OpenRoute(JSONObject _route)
     {

@@ -24,6 +24,7 @@
     <string name="routeTitlePrompt">Route Title</string>
     <string name="addAnchorButton">Add Anchor</string>
     <string name="betaLabel">Beta</string>
+    <string name="deleteButtonLabel">Delete</string>
 
 
 </resources>
